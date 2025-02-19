@@ -1,4 +1,4 @@
-.custom-navbar-color, .custom-card-body-color {
+.custom-navbar-color, .custom-card-body-color, .custom-pagination-color {
     background-color: #252627;
 }
 
@@ -10,8 +10,8 @@
     height: 80px;
 }
 
-.custom-margin {
-    margin: 100px 20px;
+.custom-mt-card {
+    margin-top: 100px;
 }
 
 .custom-rounded {
@@ -22,37 +22,47 @@
     border-radius: 10px 10px 0 0;
 }
 
-
-
-/* styles.css */
-/*
-.card {
-    width: 100%;
-    max-width: 300px;
-    margin: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.custom-input {
+    width: 400px;
 }
 
-.card-img-top {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.pagination .page-item .page-link{
+    background-color: #1d1e20;
+    border-color: #252627;
 }
 
-.card-body {
-    background-color: #f8f9fa;
-    padding: 15px;
+.pagination .page-link {
+    color: #ffffff;
 }
 
-.card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
+.pagination .page-link:focus {
+    outline: none;
+    box-shadow: none;
 }
 
-.card-text {
-    font-size: 0.9rem;
-    color: #6c757d;
+.pagination .page-item .page-link:hover {
+    background-color: #252627;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #252627;
+}
+
+.pagination .page-item .page-link[aria-label="Previous"],
+.pagination .page-item .page-link[aria-label="Next"] {
+    background-color: #252627;
+}
+
+.pagination .page-item .page-link[aria-label="Previous"]:hover,
+.pagination .page-item .page-link[aria-label="Next"]:hover {
+    background-color: #1d1e20;
 }
 
 
-*/
+
+
+
+
+
+
+
