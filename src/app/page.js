@@ -1,14 +1,15 @@
 import React from "react";
-import Movie from "@/app/movie";
+import Movie from "@/app/components/movie";
+import Card from "@/app/components/Card";
 
 export const metadata = {
-  title: "Movies Catalog",
+  title: "Name",
 };
 
 export default function Page() {
   return (
       <div>
-        <Movie></Movie>
+          <Card/>
       </div>
   );
 }

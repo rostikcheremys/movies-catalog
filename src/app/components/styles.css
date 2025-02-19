@@ -1,0 +1,58 @@
+.custom-navbar-color, .custom-card-body-color {
+    background-color: #252627;
+}
+
+.custom-background-color {
+    background-color: #1d1e20;
+}
+
+.custom-navbar {
+    height: 80px;
+}
+
+.custom-margin {
+    margin: 100px 20px;
+}
+
+.custom-rounded {
+    border-radius: 10px;
+}
+
+.custom-rounded-img {
+    border-radius: 10px 10px 0 0;
+}
+
+
+
+/* styles.css */
+/*
+.card {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    background-color: #f8f9fa;
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+
+*/
