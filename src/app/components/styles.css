@@ -6,12 +6,16 @@
     background-color: #1d1e20;
 }
 
-.custom-navbar {
-    height: 80px;
+.custom-margin-top {
+    margin-top: 120px;
 }
 
-.custom-mt-card {
-    margin-top: 100px;
+.custom-min-height {
+    min-height: 100px;
+}
+
+.custom-max-width {
+    max-width: 100%;
 }
 
 .custom-rounded {
@@ -29,10 +33,14 @@
 .pagination .page-item .page-link{
     background-color: #1d1e20;
     border-color: #252627;
+    height: 45px;
+    width: 45px;
+    font-size: 20px;
 }
 
 .pagination .page-link {
     color: #ffffff;
+    text-align: center;
 }
 
 .pagination .page-link:focus {

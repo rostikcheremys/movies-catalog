@@ -1,27 +1,56 @@
 "use client";
-import './styles.css';
 
-export default function Pagination() {
+export default function Pagination({totalPages, currentPage, setCurrentPage}) {
+    const generatePageNumbers = () => {
+        let pages = [];
+
+        if (totalPages <= 6) {
+            pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+        } else {
+            pages = Array.from({ length: 6 }, (_, i) => i + 1);
+            pages.push("...");
+
+            if (currentPage > 3 && currentPage < totalPages - 3) {
+                pages = [1, "...", currentPage - 1, currentPage, currentPage + 1, currentPage + 2, "..."];
+            }
+
+            if (currentPage >= totalPages - 3) {
+                pages = [1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+            }
+        }
+
+        return pages;
+    };
+
+    const handlePageChange = (page) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+
     return (
         <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-center g-2">
+            <ul className="pagination justify-content-center my-5">
                 <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Previous">
+                    <a className="page-link" href="#" onClick={() => handlePageChange(currentPage - 1)}
+                       aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item"><a className="page-link" href="#">4</a></li>
-                <li className="page-item"><a className="page-link" href="#">5</a></li>
-                <li className="page-item"><a className="page-link" href="#">6</a></li>
-                <li className="page-item"><a className="page-link" href="#">7</a></li>
-                <li className="page-item"><a className="page-link" href="#">8</a></li>
-                <li className="page-item"><a className="page-link" href="#">9</a></li>
-                <li className="page-item"><a className="page-link" href="#">10</a></li>
+                    {generatePageNumbers().map((page, index) => (
+                        <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+                            {page === "..." ? (
+                                <span className="page-link">...</span>
+                            ) : (
+                                <a className="page-link" href="#" onClick={() => handlePageChange(page)}>
+                                    {page}
+                                </a>
+                            )}
+                        </li>
+                    ))}
                 <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Next">
+                    <a className="page-link" href="#" onClick={() => handlePageChange(currentPage + 1)}
+                       aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
