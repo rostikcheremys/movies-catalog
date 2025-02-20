@@ -18,6 +18,7 @@ export default function Card({ isTvShows }) {
         fetch(endpoint)
             .then(res => res.json())
             .then(json => {
+                console.log(json);
                 setMovieList(json.results);
                 setTotalPages(json.total_pages);
             });
@@ -37,10 +38,16 @@ export default function Card({ isTvShows }) {
                 {movieList.map((item) => (
                     <div key={item.id} className="col">
                         <div className="card custom-card-body-color custom-rounded">
+                            {item.adult && (
+                                <div className="custom-adult position-absolute">
+                                    +18
+                                </div>
+                            )}
                             <img
                                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                                 className="card-img-top custom-rounded-img"
                                 alt={item.title || item.name}
+
                             />
                             <div className="card-body custom-card-body-color custom-rounded">
                                 <h5 className="card-title text-white text-truncate d-block custom-max-width">

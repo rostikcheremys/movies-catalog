@@ -32,7 +32,7 @@ export default function Pagination({totalPages, currentPage, setCurrentPage}) {
         <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center my-5">
                 <li className="page-item">
-                    <a className="page-link" href="#" onClick={() => handlePageChange(currentPage - 1)}
+                    <a className="page-link text-white" href="#" onClick={() => handlePageChange(currentPage - 1)}
                        aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
@@ -40,16 +40,16 @@ export default function Pagination({totalPages, currentPage, setCurrentPage}) {
                     {generatePageNumbers().map((page, index) => (
                         <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
                             {page === "..." ? (
-                                <span className="page-link">...</span>
+                                <span className="page-link text-white">...</span>
                             ) : (
-                                <a className="page-link" href="#" onClick={() => handlePageChange(page)}>
+                                <a className="page-link text-white" href="#" onClick={() => handlePageChange(page)}>
                                     {page}
                                 </a>
                             )}
                         </li>
                     ))}
                 <li className="page-item">
-                    <a className="page-link" href="#" onClick={() => handlePageChange(currentPage + 1)}
+                    <a className="page-link text-white" href="#" onClick={() => handlePageChange(currentPage + 1)}
                        aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
