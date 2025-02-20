@@ -1,17 +1,17 @@
-import React from "react";
-import Movie from "@/app/components/movie";
+"use client";
+
+import React, {useState} from "react";
+import Movie from "@/app/components/Movie";
 import Card from "@/app/components/Card";
 import Pagination from "@/app/components/Pagination";
-
-export const metadata = {
-  title: "Name",
-};
+import NavBar from "@/app/components/NavBar";
 
 export default function Page() {
-  return (
-      <div className="custom-mt-card">
-
-          <Card/>
-      </div>
-  );
+    const [isTvShows, setIsTvShows] = useState(false);
+    return (
+        <div>
+            <NavBar setIsTvShows={setIsTvShows} />
+            <Card isTvShows={isTvShows} />
+        </div>
+    );
 }

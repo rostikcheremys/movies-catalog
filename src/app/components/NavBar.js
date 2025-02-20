@@ -1,6 +1,6 @@
 "use client";
 
-export default function NavBar() {
+export default function NavBar({ setIsTvShows }) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar-color custom-min-height">
             <div className="container-fluid custom-navbar-color">
@@ -13,10 +13,14 @@ export default function NavBar() {
                 <div className="collapse navbar-collapse m-3" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto fs-4">
                         <li className="nav-item me-3">
-                            <a className="nav-link active" aria-current="page" href="#">Movies</a>
+                            <a className="nav-link" aria-current="page" href="#" onClick={() => setIsTvShows(false)}>
+                                Movies
+                            </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">TV Shows</a>
+                            <a className="nav-link" href="#" onClick={() => setIsTvShows(true)}>
+                                TV Shows
+                            </a>
                         </li>
                     </ul>
                     <form className="d-flex mt-1" role="search">
