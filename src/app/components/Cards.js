@@ -2,35 +2,27 @@
 
 import React, { useEffect, useState } from "react";
 import Pagination from "@/app/components/Pagination";
+import Card from "@/app/components/Card";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
-
-export default function Cards({ isTvShows }) {
+export default function Cards({ api }) {  // Отримуємо api з пропсів
     const [cardsList, setCardsList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
     const getCards = (page = 1) => {
-        const apiKey = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
-        const endpoint = isTvShows
-            ? `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${page}`
-            : `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${page}`;
-
-        fetch(endpoint)
+        fetch(`${api}&page=${page}`) // Додаємо змінну `page` у запит
             .then(res => res.json())
             .then(json => {
-                console.log(json.results)
-                setCardsList(json.results);
-                setTotalPages(json.total_pages);
-            });
+                console.log(json.results);
+                setCardsList(json.results || []);
+                setTotalPages(json.total_pages || 1);
+            })
+            .catch(error => console.error("Error fetching data:", error));
     };
 
     useEffect(() => {
-        setCurrentPage(1);
-    }, [isTvShows]);
-
-    useEffect(() => {
         getCards(currentPage);
-    }, [currentPage, isTvShows]);
+    }, [currentPage]);
 
     return (
         <div>
@@ -39,41 +31,6 @@ export default function Cards({ isTvShows }) {
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
-        </div>
-    );
-}
-
-function Card(item) {
-    const voteAverage = item.vote_average;
-    const title = item.title || item.name || 'No title available';
-
-    return (
-        <div key={item.id} className="col">
-            <div className="card custom-card-body-color custom-rounded">
-
-                <div className={`custom-vote-average text-white start-0 top-0 p-1 fw-bold position-absolute 
-                    ${voteAverage >= 8 ? "bg-success" : voteAverage >= 7 ? "bg-warning" : "bg-orange"}`}>
-                    {voteAverage.toFixed(2)}
-                </div>
-
-                {item.adult && (
-                    <div className="custom-adult text-white end-0 top-0 p-1 fw-bold position-absolute">+18</div>
-                )}
-                <img
-                    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    className="custom-rounded-img"
-                    alt={title}
-
-                />
-                <div className="card-body custom-card-body-color custom-rounded pb-1">
-                    <h5 className="card-title text-center text-truncate text-white d-block custom-max-width">
-                        {title}
-                    </h5>
-                    <h6 className="text-center text-truncate text-white d-block custom-max-width custom-opacity">
-                        {item.release_date ? item.release_date.slice(0, 4) : (item.first_air_date ? item.first_air_date.slice(0, 4) : 'N/A')}
-                    </h6>
-                </div>
-            </div>
         </div>
     );
 }
