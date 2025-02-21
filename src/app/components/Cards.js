@@ -18,6 +18,7 @@ export default function Cards({ isTvShows }) {
         fetch(endpoint)
             .then(res => res.json())
             .then(json => {
+                console.log(json.results)
                 setCardsList(json.results);
                 setTotalPages(json.total_pages);
             });
@@ -44,7 +45,7 @@ export default function Cards({ isTvShows }) {
 
 function Card(item) {
     const voteAverage = item.vote_average;
-    const title = item.title || 'No title available';
+    const title = item.title || item.name || 'No title available';
 
     return (
         <div key={item.id} className="col">
@@ -64,9 +65,12 @@ function Card(item) {
                     alt={title}
 
                 />
-                <div className="card-body custom-card-body-color custom-rounded">
-                    <h6 className="card-title text-center text-truncate text-white d-block custom-max-width">
+                <div className="card-body custom-card-body-color custom-rounded pb-1">
+                    <h5 className="card-title text-center text-truncate text-white d-block custom-max-width">
                         {title}
+                    </h5>
+                    <h6 className="text-center text-truncate text-white d-block custom-max-width custom-opacity">
+                        {item.release_date ? item.release_date.slice(0, 4) : (item.first_air_date ? item.first_air_date.slice(0, 4) : 'N/A')}
                     </h6>
                 </div>
             </div>

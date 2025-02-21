@@ -14,7 +14,7 @@ export default function NavBar({ isTvShows, setIsTvShows }) {
                     <ul className="navbar-nav me-auto fs-4">
                         <li className="nav-item me-3">
                             <a className={`nav-link ${!isTvShows ? "active text-warning" : ""}`}
-                               href="/tvS"
+                               href="#"
                                onClick={() => setIsTvShows(false)}>
                                 Movies
                             </a>
