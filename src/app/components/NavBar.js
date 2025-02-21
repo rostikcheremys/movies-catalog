@@ -1,6 +1,6 @@
 "use client";
 
-export default function NavBar({ setIsTvShows }) {
+export default function NavBar({ isTvShows, setIsTvShows }) {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar-color custom-min-height">
             <div className="container-fluid custom-navbar-color">
@@ -13,12 +13,16 @@ export default function NavBar({ setIsTvShows }) {
                 <div className="collapse navbar-collapse m-3" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto fs-4">
                         <li className="nav-item me-3">
-                            <a className="nav-link" aria-current="page" href="#" onClick={() => setIsTvShows(false)}>
+                            <a className={`nav-link ${!isTvShows ? "active text-warning" : ""}`}
+                               href="/tvS"
+                               onClick={() => setIsTvShows(false)}>
                                 Movies
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" onClick={() => setIsTvShows(true)}>
+                            <a className={`nav-link ${isTvShows ? "active text-warning" : ""}`}
+                               href="#"
+                               onClick={() => setIsTvShows(true)}>
                                 TV Shows
                             </a>
                         </li>
