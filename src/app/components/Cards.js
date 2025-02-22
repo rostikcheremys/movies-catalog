@@ -3,21 +3,19 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "@/app/components/Pagination";
 import Card from "@/app/components/Card";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
-export default function Cards({ api }) {  // Отримуємо api з пропсів
+
+export default function Cards({ api }) {
     const [cardsList, setCardsList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
     const getCards = (page = 1) => {
-        fetch(`${api}&page=${page}`) // Додаємо змінну `page` у запит
+        fetch(`${api}&page=${page}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json.results);
-                setCardsList(json.results || []);
-                setTotalPages(json.total_pages || 1);
-            })
-            .catch(error => console.error("Error fetching data:", error));
+                setCardsList(json.results);
+                setTotalPages(json.total_pages);
+            });
     };
 
     useEffect(() => {
