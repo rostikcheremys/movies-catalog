@@ -1,33 +1,51 @@
 "use client";
 
-export default function Card(item) {
-    const voteAverage = item.vote_average;
-    const title = item.title || item.name || 'No title available';
+import { useState } from "react";
+
+export default function Card(props) {
+    const { vote_average, title, name, poster_path, id, adult, release_date, first_air_date } = props;
+    const [isHovered, setIsHovered] = useState(false);
+    const [isPlayButtonHovered, setIsPlayButtonHovered] = useState(false);
+
+    const voteAverage = vote_average;
+    const movieTitle = title || name || "No title available";
 
     return (
-        <div key={item.id} className="col">
-            <div className="card custom-card-body-color custom-rounded d-flex, flex-column, justify-content-between h-100">
+        <div key={id} className="col">
+            <div className="card custom-card-body-color custom-rounded d-flex flex-column justify-content-between h-100">
+                <div className="position-relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                    {isHovered && (
+                        <div
+                            className="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center"
+                            onMouseEnter={() => setIsPlayButtonHovered(true)}
+                            onMouseLeave={() => setIsPlayButtonHovered(false)}
+                        >
+                            <div className="play-button">
+                                <div className="play-icon"></div>
+                            </div>
+                        </div>
+                    )}
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                        className={`w-100 h-auto object-fit-cover border-to custom-img ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
+                        alt={movieTitle}
+                    />
+                </div>
 
-                <div className={`custom-vote-average text-white start-0 top-0 p-1 fw-bold position-absolute 
+                <div
+                    className={`custom-vote-average text-white start-0 top-0 p-1 fw-bold position-absolute 
                     ${voteAverage >= 8 ? "bg-success" : voteAverage >= 7 ? "bg-warning" : "bg-orange"}`}>
                     {voteAverage.toFixed(2)}
                 </div>
-
-                {item.adult && (
-                    <div className="custom-adult text-white end-0 top-0 p-1 fw-bold position-absolute">+18</div>
-                )}
-                <img
-                    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    className="w-100, h-auto, object-fit-cover, border-to custom-rounded-img"
-                    alt={title}
-
-                />
-                <div className="card-body custom-card-body-color custom-rounded  pb-1 flex-grow-1 d-flex flex-column justify-content-start h-100">
+                    {adult && (
+                        <div className="custom-adult text-white end-0 top-0 p-1 fw-bold position-absolute">+18</div>
+                    )}
+                <div className="card-body custom-card-body-color custom-card-body-rounded pb-1 flex-grow-1 d-flex flex-column justify-content-start h-100">
                     <h5 className="card-title text-center text-truncate text-white d-block custom-max-width">
-                        {title}
+                        {movieTitle}
                     </h5>
                     <h6 className="text-center text-truncate text-white d-block custom-max-width custom-opacity">
-                        {item.release_date ? item.release_date.slice(0, 4) : (item.first_air_date ? item.first_air_date.slice(0, 4) : 'N/A')}
+                        {release_date ? release_date.slice(0, 4) : first_air_date ? first_air_date.slice(0, 4) : "N/A"}
                     </h6>
                 </div>
             </div>

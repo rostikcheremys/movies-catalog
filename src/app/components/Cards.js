@@ -13,8 +13,8 @@ export default function Cards({ api }) {
         fetch(`${api}&page=${page}`)
             .then(res => res.json())
             .then(json => {
-                setCardsList(json.results);
-                setTotalPages(json.total_pages);
+                setCardsList(json.results || []);
+                setTotalPages(json.total_pages || 1);
             });
     };
 
@@ -25,7 +25,9 @@ export default function Cards({ api }) {
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4 custom-mt-card mx-3 custom-margin-top">
-                {cardsList.map((item) => (Card(item)))}
+                {cardsList.map((item) => (
+                    <Card key={item.id} {...item} />
+                ))}
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />

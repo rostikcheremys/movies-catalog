@@ -6,8 +6,41 @@
     background-color: #1d1e20;
 }
 
-.custom-rounded-img {
+.custom-card-body-rounded {
+    border-radius: 0 0 10px 10px;
+}
+
+.custom-img {
     border-radius: 10px 10px 0 0;
+}
+
+.custom-img:hover {
+    background-color: white;
+    opacity: 50%;
+}
+
+.play-button:hover ~ .custom-img {
+    background-color: transparent !important;
+}
+
+.play-button {
+    width: 60px;
+    height: 60px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+}
+
+.play-icon {
+    margin-left: 2px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 16px solid white;
 }
 
 .card-body .card-title, .card-body .card-text {
