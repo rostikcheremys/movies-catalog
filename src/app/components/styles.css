@@ -19,10 +19,6 @@
     opacity: 50%;
 }
 
-.play-button:hover ~ .custom-img {
-    background-color: transparent !important;
-}
-
 .play-button {
     width: 60px;
     height: 60px;
