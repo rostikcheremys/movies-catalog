@@ -1,18 +1,24 @@
 'use client'
 
-
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import Link from "next/link";
 
 export default function NavBar() {
     const pathName = usePathname();
     const [activePath, setActivePath] = useState("");
+    const [query, setQuery] = useState("");
+    const router = useRouter();
     const activeItem = (path) => activePath === path ? {color: "red"} : {color: "white"};
 
     useEffect( () => {
         setActivePath(pathName)
     },[pathName]);
+
+    useEffect(() => {
+        console.log(query);
+        query ? router.push(`/search?query=${query}`) : router.push("/");
+    }, [query, router]);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar-color custom-min-height">
@@ -34,8 +40,8 @@ export default function NavBar() {
                         </li>
                     </ul>
                     <form className="d-flex mt-1" role="search">
-                        <input className="form-control me-3" type="search" placeholder="Search.." aria-label="Search"/>
-                        <button className="btn btn-outline-light" type="submit">Search</button>
+                        <input className="form-control me-3" type="search" placeholder="Search.." aria-label="Search" value={query}
+                               onChange={(e) => setQuery(e.target.value)}/>
                     </form>
                 </div>
             </div>

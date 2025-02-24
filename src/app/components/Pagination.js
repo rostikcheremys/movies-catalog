@@ -42,14 +42,14 @@ export default function Pagination({totalPages, currentPage, setCurrentPage}) {
                             {page === "..." ? (
                                 <span className="page-link text-white">...</span>
                             ) : (
-                                <a className="page-link text-white" href="#" onClick={() => handlePageChange(page)}>
+                                <a className="page-link text-white" onClick={() => handlePageChange(page)}>
                                     {page}
                                 </a>
                             )}
                         </li>
                     ))}
                 <li className="page-item">
-                    <a className="page-link text-white" href="#" onClick={() => handlePageChange(currentPage + 1)}
+                    <a className="page-link text-white" onClick={() => handlePageChange(currentPage + 1)}
                        aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>

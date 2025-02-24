@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import Pagination from "@/app/components/Pagination";
 import Card from "@/app/components/Card";
+import {useSearchParams} from "next/navigation";
 
 export default function Cards({ api }) {
     const [cardsList, setCardsList] = useState([]);
@@ -13,14 +14,40 @@ export default function Cards({ api }) {
         fetch(`${api}&page=${page}`)
             .then(res => res.json())
             .then(json => {
+                console.log(json);
                 setCardsList(json.results || []);
                 setTotalPages(json.total_pages || 1);
             });
     };
 
+    const prevPageRef = useRef();
+    const prevApiRef = useRef();
+
+
     useEffect(() => {
-        getCards(currentPage);
-    }, [currentPage]);
+        if (prevApiRef.current !== api) {
+            console.log("api")
+
+            prevApiRef.current = api;
+
+            console.log("currentPage = 1")
+            setCurrentPage(1);
+            getCards(1);
+        }
+
+        if (prevPageRef.current !== currentPage) {
+
+            if (currentPage !== 1) {
+                prevPageRef.current = currentPage;
+
+                console.log("currentPage")
+                getCards(currentPage);
+            }
+        }
+    }, [api, currentPage]);
+
+
+
 
     return (
         <div>

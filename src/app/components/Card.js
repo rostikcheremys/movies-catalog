@@ -35,7 +35,7 @@ export default function Card(props) {
                 <div
                     className={`custom-vote-average text-white start-0 top-0 p-1 fw-bold position-absolute 
                     ${voteAverage >= 8 ? "bg-success" : voteAverage >= 7 ? "bg-warning" : "bg-orange"}`}>
-                    {voteAverage.toFixed(2)}
+                    {(voteAverage ? voteAverage.toFixed(2) : "0.00")}
                 </div>
                     {adult && (
                         <div className="custom-adult text-white end-0 top-0 p-1 fw-bold position-absolute">+18</div>
