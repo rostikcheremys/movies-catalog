@@ -1,6 +1,6 @@
 'use client'
 
-export default function Pagination({totalPages, currentPage, setCurrentPage}) {
+export default function Pagination({totalPages, currentPage, setCurrentPage, fetch}) {
     const generatePageNumbers = () => {
         let pages = [];
 
@@ -25,6 +25,7 @@ export default function Pagination({totalPages, currentPage, setCurrentPage}) {
     const handlePageChange = (page) => {
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
+            fetch(page);
         }
     };
 
