@@ -26,6 +26,8 @@ export default function Pagination({totalPages, currentPage, setCurrentPage, fet
         if (page >= 1 && page <= totalPages) {
             setCurrentPage(page);
             fetch(page);
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     };
 

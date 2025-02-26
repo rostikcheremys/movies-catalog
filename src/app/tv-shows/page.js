@@ -10,6 +10,7 @@ export default function Page() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
+
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const tvShowsApi = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}`;
 
@@ -24,11 +25,11 @@ export default function Page() {
             });
     };
 
-    const prevApiRef = useRef();
+    const previousMovieApi = useRef();
 
     useEffect(() => {
-        if (currentPage !== 1 || prevApiRef.current !== tvShowsApi ) {
-            prevApiRef.current = tvShowsApi;
+        if (previousMovieApi.current !== tvShowsApi ) {
+            previousMovieApi.current = tvShowsApi;
             getCards(currentPage);
         }
     }, [tvShowsApi]);

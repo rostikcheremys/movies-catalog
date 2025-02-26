@@ -23,12 +23,11 @@ export default function Page() {
             });
     };
 
-    const prevApiRef = useRef();
+    const previousTVShowsApi = useRef();
 
     useEffect(() => {
-        if (currentPage !== 1 || prevApiRef.current !== movieApi) {
-            console.log("api")
-            prevApiRef.current = movieApi;
+        if (previousTVShowsApi.current !== movieApi) {
+            previousTVShowsApi.current = movieApi;
             getCards(currentPage);
         }
     }, [movieApi]);
