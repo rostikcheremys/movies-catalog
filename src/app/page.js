@@ -37,19 +37,18 @@ export default function Page() {
     }, [movieApi]);
 
     const handleCardClick = (id) => {
-        console.log(id);
         router.push(`/movie/${id}`);
     };
-
 
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4 mx-3 custom-margin-top">
                 {cardsList.map((item) => (
-                    <div key={item.id} onClick={() => handleCardClick(item.id)} style={{cursor: 'pointer'}}>
+                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id)} style={{cursor: 'pointer'}}>
                         <Card {...item} />
                     </div>
                 ))}
+
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} fetch={getCards}/>

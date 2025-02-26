@@ -4,7 +4,7 @@ import {useState, useEffect, useRef} from "react";
 import Pagination from "@/app/components/Pagination";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import Card from "@/app/components/Card";
-import {useRouter} from "next/compat/router";
+import {useRouter} from "next/navigation";
 
 export default function Page() {
 
@@ -45,10 +45,12 @@ export default function Page() {
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4 mx-3 custom-margin-top">
                 {cardsList.map((item) => (
-                    <div key={item.id} onClick={() => handleCardClick(item.id)} style={{cursor: 'pointer'}}>
+                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id)}
+                         style={{cursor: 'pointer'}}>
                         <Card {...item} />
                     </div>
                 ))}
+
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} fetch={getCards}/>
