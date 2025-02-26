@@ -4,6 +4,7 @@ import {useState, useEffect, useRef} from "react";
 import Pagination from "@/app/components/Pagination";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import Card from "@/app/components/Card";
+import {useRouter} from "next/compat/router";
 
 export default function Page() {
 
@@ -34,11 +35,19 @@ export default function Page() {
         }
     }, [tvShowsApi]);
 
+    const router = useRouter();
+
+    const handleCardClick = (id) => {
+        router.push(`/tv/${id}`);
+    };
+
     return (
         <div>
-            <div className="row row-cols-1 row-cols-md-4 g-4 custom-mt-card mx-3 custom-margin-top">
+            <div className="row row-cols-1 row-cols-md-4 g-4 mx-3 custom-margin-top">
                 {cardsList.map((item) => (
-                    <Card key={item.id} {...item} />
+                    <div key={item.id} onClick={() => handleCardClick(item.id)} style={{cursor: 'pointer'}}>
+                        <Card {...item} />
+                    </div>
                 ))}
             </div>
 

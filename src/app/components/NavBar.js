@@ -36,7 +36,7 @@ export default function NavBar() {
 
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" href="/tv-shows" style={activeItem("/tv-shows")}>TV Shows</Link>
+                            <Link className="nav-link" href="/tv" style={activeItem("/tv")}>TV Shows</Link>
                         </li>
                     </ul>
                     <form className="d-flex mt-1" role="search">
