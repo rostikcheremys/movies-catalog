@@ -27,7 +27,7 @@ export default function Card(props) {
                 )}
                 <img
                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                    className={`w-100 h-auto object-fit-cover border-to custom-img ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
+                    className={`w-100 h-auto object-fit-cover border-to custom-card-img ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
                     alt={movieTitle}
                 />
             </div>

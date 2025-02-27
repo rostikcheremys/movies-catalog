@@ -40,7 +40,7 @@ export default function Page() {
 
     return (
         <div>
-            <div className="row row-cols-1 row-cols-md-4 g-4 mx-3 custom-margin-top">
+            <div className="row row-cols-1 row-cols-md-4 mx-3 custom-margin-top">
                 {cardsList.map((item) => (
                     <Card key={item.id} {...item} />
                 ))}
