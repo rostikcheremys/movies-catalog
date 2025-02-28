@@ -8,7 +8,7 @@ export default function Card(props) {
     const [isPlayButtonHovered, setIsPlayButtonHovered] = useState(false);
 
     const voteAverage = vote_average;
-    const movieTitle = title || name || "No title available";
+    const itemTitle = title || name || "No title available";
 
     return (
         <div className="card custom-card-body-color custom-rounded d-flex flex-column justify-content-between h-100">
@@ -28,7 +28,7 @@ export default function Card(props) {
                 <img
                     src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                     className={`w-100 h-auto object-fit-cover border-to custom-card-img ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
-                    alt={movieTitle}
+                    alt={itemTitle}
                 />
             </div>
 
@@ -43,7 +43,7 @@ export default function Card(props) {
             <div
                 className="card-body custom-card-body-color custom-card-body-rounded pb-1 flex-grow-1 d-flex flex-column justify-content-start h-100">
                 <h5 className="card-title text-center text-truncate text-white d-block custom-max-width">
-                    {movieTitle}
+                    {itemTitle}
                 </h5>
                 <h6 className="text-center text-truncate text-white d-block custom-max-width custom-opacity">
                     {release_date ? release_date.slice(0, 4) : first_air_date ? first_air_date.slice(0, 4) : "N/A"}

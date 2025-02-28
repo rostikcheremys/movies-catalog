@@ -40,7 +40,7 @@ export default function NavBar() {
                         </li>
                     </ul>
                     <form className="d-flex mt-1" role="search">
-                        <input className="form-control me-3" type="search" placeholder="Search.." aria-label="Search" value={query}
+                        <input className="form-control " type="search" placeholder="Search.." aria-label="Search" value={query}
                                onChange={(e) => setQuery(e.target.value)}/>
                     </form>
                 </div>

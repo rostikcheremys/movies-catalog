@@ -35,7 +35,7 @@ export default function Pagination({totalPages, currentPage, setCurrentPage, fet
         <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center my-5">
                 <li className="page-item">
-                    <a className="page-link text-white" href="#" onClick={() => handlePageChange(currentPage - 1)}
+                    <a className="page-link text-white" onClick={() => handlePageChange(currentPage - 1)}
                        aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>

@@ -1,62 +1,77 @@
 /*[id]/page.js*/
 
-.card-body-id {
-    margin-top: 144px;
+.card-body-item {
     display: flex;
     flex-direction: row;
     background-color: #252627;
     border-radius: 10px;
+    width: 80%;
+    margin: 144px auto 0 auto;
 }
 
 .movie-card {
     display: flex;
     flex-direction: row;
-    gap: 60px;
+    gap: 50px;
 }
 
 .image-container {
     flex-shrink: 0;
 }
 
-.img-id {
+.img-item {
     width: 100%;
     height: 600px;
     border-radius: 10px;
 }
 
+.vote-average-item {
+    font-size: 14px;
+    border-radius: 10px 0 0 0;
+}
+
 .content-container {
     flex-grow: 1;
     color: white;
-    margin: 20px 60px 0 0;
+    padding: 15px 40px 20px 0;
 }
 
-.title-id a{
+.title-item a{
     font-weight: bold;
     color: white;
     text-decoration: none;
     font-size: 42px;
 }
 
-.title-id a:hover {
+.title-item a:hover {
     color: red;
 }
 
-.card-info-id p {
+.card-info-item p {
     margin: 10px 0;
     font-size: 18px;
 }
 
-.custom-trailer {
+.card-info-item p strong {
+    color: grey;
+}
+
+.overview-item {
+    padding-top: 10px;
+}
+
+.iframe-trailer {
     width: 100%;
     height: 700px;
     margin-top: 70px;
 }
 
 @media (max-width: 1200px) {
-    .card-body-id {
+    .card-body-item {
         flex-direction: column;
         align-items: center;
-        width: 100%;
+        width: 500px;
+        margin: 144px auto 0 auto;
     }
 
     .movie-card {
@@ -64,6 +79,7 @@
         align-items: center;
         width: 100%;
         gap: 0;
+        position: relative;
     }
 
     .image-container {
@@ -72,10 +88,16 @@
         justify-content: center;
     }
 
-    .img-id {
-        width: 100%;
+    .img-item {
+        width: 500px;
         height: 100%;
         object-fit: cover;
+    }
+
+    .vote-average-item {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .content-container {
@@ -84,7 +106,20 @@
         margin: 0;
         padding: 20px;
     }
+
+    .trailer-container {
+        width: 500px;
+        margin: auto;
+    }
+
+    .iframe-trailer {
+        height: 350px;
+    }
 }
+
+
+
+
 
 .custom-navbar-color, .custom-card-body-color, .custom-pagination-color, .custom-footer-color, .custom-body-color {
     background-color: #252627;
@@ -111,24 +146,6 @@
 
 .custom-mt-card-item {
     margin-top: 144px;
-}
-
-
-
-.item-title {
-
-}
-
-.item-title-a {
-    color: white;
-}
-
-
-
-
-
-.card-col-2 {
-    margin: 20px;
 }
 
 .play-button {
