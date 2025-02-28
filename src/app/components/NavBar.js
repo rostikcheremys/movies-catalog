@@ -23,7 +23,7 @@ export default function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top custom-navbar-color custom-min-height">
             <div className="container-fluid custom-navbar-color">
-                <Link className="navbar-brand ms-3 fs-3" href="/">Name</Link>
+                <Link className="name-item ms-3 fs-3" href="/">MovieNest</Link>
                 <button className="navbar-toggler me-3" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
