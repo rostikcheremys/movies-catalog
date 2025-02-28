@@ -39,18 +39,12 @@ export default function Page() {
                             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                             alt={movie.title || "No title available"}
                         />
-
-
                     </div>
 
-                    <div className={`vote-average-item text-white t-1 p-1 fw-bold position-absolute 
+                    <div className={`vote-average-item
                             ${movie.vote_average >= 8 ? "bg-success" : movie.vote_average >= 7 ? "bg-warning" : "bg-orange"}`}>
                         {(movie.vote_average ? movie.vote_average.toFixed(2) : "0.00")}
                     </div>
-
-                    {movie.adult && (
-                        <div className="custom-adult text-white end-0 top-0 p-1 fw-bold position-absolute">+18</div>
-                    )}
 
                     <div className="content-container">
                         <div className="title-item">

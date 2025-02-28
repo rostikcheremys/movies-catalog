@@ -5,7 +5,7 @@
     flex-direction: row;
     background-color: #252627;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     margin: 144px auto 0 auto;
 }
 
@@ -21,26 +21,30 @@
 
 .img-item {
     width: 100%;
-    height: 600px;
+    height: 650px;
     border-radius: 10px;
 }
 
 .vote-average-item {
+    position: absolute;
     font-size: 14px;
     border-radius: 10px 0 0 0;
+    color: white;
+    font-weight: bold;
+    padding: 4px;
 }
 
 .content-container {
     flex-grow: 1;
     color: white;
-    padding: 15px 40px 20px 0;
+    padding: 20px 40px 20px 0;
 }
 
 .title-item a{
     font-weight: bold;
     color: white;
     text-decoration: none;
-    font-size: 42px;
+    font-size: 36px;
 }
 
 .title-item a:hover {
@@ -50,6 +54,7 @@
 .card-info-item p {
     margin: 10px 0;
     font-size: 18px;
+    text-align: justify;
 }
 
 .card-info-item p strong {
@@ -60,10 +65,15 @@
     padding-top: 10px;
 }
 
+.trailer-container {
+    width: 90%;
+    margin: auto;
+}
+
 .iframe-trailer {
     width: 100%;
-    height: 700px;
-    margin-top: 70px;
+    height: 650px;
+    margin-top: 44px;
 }
 
 @media (max-width: 1200px) {
@@ -116,6 +126,24 @@
         height: 350px;
     }
 }
+
+.footer-container {
+    margin-top: 40px;
+    height: 100px;
+    color: white;
+    text-align: center;
+    align-content: center;
+}
+
+.github {
+    color: white;
+    text-decoration: none;
+}
+
+.github:hover {
+    color: red;
+}
+
 
 
 
@@ -246,10 +274,7 @@
     background-color: #1d1e20;
 }
 
-.github {
-    color: white;
-    text-decoration: none;
-}
+
 
 
 

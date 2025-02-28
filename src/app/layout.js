@@ -13,7 +13,7 @@ export default function DashboardLayout({ children }) {
         <html lang="en" suppressHydrationWarning>
             <body className="custom-background-color" suppressHydrationWarning>
                 <NavBar/>
-                <main className="my-5">{children}</main>
+                <main>{children}</main>
                 <Footer/>
             </body>
         </html>
