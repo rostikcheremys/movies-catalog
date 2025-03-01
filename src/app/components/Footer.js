@@ -2,9 +2,9 @@
 
 export default function Footer() {
     return (
-        <footer className="footer-container custom-footer-color">
+        <footer className="footer-container">
             <a className="github" href="https://github.com/rostikcheremys/movies-catalog"><i className="bi bi-github"></i> GitHub</a>
-            <p className="mb-0">&copy; 2025 Rostyslav Cheremys</p>
+            <p className="developer">&copy; 2025 Rostyslav Cheremys</p>
         </footer>
     );
 }

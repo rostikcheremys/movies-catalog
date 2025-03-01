@@ -37,11 +37,12 @@ export default function Card(props) {
                     ${voteAverage >= 8 ? "bg-success" : voteAverage >= 7 ? "bg-warning" : "bg-orange"}`}>
                 {(voteAverage ? voteAverage.toFixed(2) : "0.00")}
             </div>
+
             {adult && (
                 <div className="custom-adult text-white end-0 top-0 p-1 fw-bold position-absolute">+18</div>
             )}
-            <div
-                className="card-body custom-card-body-color custom-card-body-rounded pb-1 flex-grow-1 d-flex flex-column justify-content-start h-100">
+
+            <div className="card-body custom-card-body-color custom-card-body-rounded pb-1 flex-grow-1 d-flex flex-column justify-content-start h-100">
                 <h5 className="card-title text-center text-truncate text-white d-block custom-max-width">
                     {itemTitle}
                 </h5>

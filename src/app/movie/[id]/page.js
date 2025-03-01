@@ -40,7 +40,7 @@ export default function Page() {
     return (
         <div className="container">
             <div className="card-body-item">
-                <div className="movie-card">
+                <div className="card-container">
                     <div className="image-container">
                         <img
                             className="img-item"
@@ -81,19 +81,23 @@ export default function Page() {
                 </div>
             </div>
 
+            <div className="overview-container">
+                <h3>Overview</h3>
+                <div className="line-item"></div>
+                <p>{movie.overview}</p>
+            </div>
 
-            {trailer ? (
+            {trailer && (
                 <div className="trailer-container">
-                    <iframe
-                        className="iframe-trailer"
-                        src={`https://www.youtube.com/embed/${trailer}`}
-                        allowFullScreen
-                    ></iframe>
+                    <h3>{movie.title} — Official Trailer</h3>
+                    <div className="line-item-grey"></div>
+                    <iframe className="iframe-trailer" src={`https://www.youtube.com/embed/${trailer}`} allowFullScreen></iframe>
                 </div>
-            ) : (<p>No trailer available...</p>)}
+            )}
 
             <div className="cast-container">
-                <h2>Top Billed Cast</h2>
+                <h3>Top Billed Cast</h3>
+                <div className="line-item-grey"></div>
                 <div className="overflow-auto">
                     <ul className="cast-list">
                         {cast.map((member) => (
