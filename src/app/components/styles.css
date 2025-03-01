@@ -47,12 +47,7 @@
     font-size: 32px;
 }
 
-.title-item a:hover {
-    color: #da202f;
-    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.line-item {
+.line-item-static {
     width: 100%;
     height: 8px;
     background-color: #da202f;
@@ -60,12 +55,17 @@
     margin-bottom: 10px;
 }
 
-.line-item-grey {
+.line-item {
     width: 100%;
     height: 8px;
     background-color: #1d1e20;
     border-radius: 3px;
     margin-bottom: 10px;
+}
+
+.content-container:hover .line-item {
+    background-color: #da202f;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .card-info-item i {
@@ -109,6 +109,11 @@
     text-align: justify;
 }
 
+.overview-container:hover .line-item {
+    background-color: #da202f;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
 .overview-container p {
     margin: 0;
 }
@@ -124,6 +129,11 @@
     color: white;
 }
 
+.trailer-container:hover .line-item {
+    background-color: #da202f;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
 .iframe-trailer {
     width: 100%;
     height: 650px;
@@ -136,6 +146,11 @@
     background-color: #252627;
     border-radius: 10px;
     width: 90%;
+}
+
+.cast-container:hover .line-item {
+    background-color: #da202f;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .cast-container h3 {

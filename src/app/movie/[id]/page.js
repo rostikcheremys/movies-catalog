@@ -59,7 +59,7 @@ export default function Page() {
                             <a href={movie.homepage}>{movie.title}</a>
                         </div>
 
-                        <div className="line-item"></div>
+                        <div className="line-item-static"></div>
 
                         <div className="card-info-item">
                             <p><i className="bi bi-star-fill"></i> {movie.popularity}</p>
@@ -90,14 +90,14 @@ export default function Page() {
             {trailer && (
                 <div className="trailer-container">
                     <h3>{movie.title} — Official Trailer</h3>
-                    <div className="line-item-grey"></div>
+                    <div className="line-item"></div>
                     <iframe className="iframe-trailer" src={`https://www.youtube.com/embed/${trailer}`} allowFullScreen></iframe>
                 </div>
             )}
 
             <div className="cast-container">
                 <h3>Top Billed Cast</h3>
-                <div className="line-item-grey"></div>
+                <div className="line-item"></div>
                 <div className="overflow-auto">
                     <ul className="cast-list">
                         {cast.map((member) => (
