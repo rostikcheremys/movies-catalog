@@ -16,12 +16,10 @@ export default function Page() {
     useEffect(() => {
         if (!id) return;
 
-        // Отримання інформації про фільм
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
             .then((res) => res.json())
             .then((data) => setMovie(data));
 
-        // Отримання трейлера фільму
         fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`)
             .then((res) => res.json())
             .then((data) => {
@@ -29,18 +27,12 @@ export default function Page() {
                 if (officialTrailer) setTrailer(officialTrailer.key);
             });
 
-        // Отримання акторського складу та знімальної групи
         fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`)
             .then((res) => res.json())
             .then((data) => {
                 setCast(data.cast);
                 setCrew(data.crew);
             });
-
-        // Отримання відгуків глядачів
-        fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${apiKey}`)
-            .then((res) => res.json())
-            .then((data) => setReviews(data.results));
     }, [id]);
 
     if (!movie) return <p>Loading...</p>;
@@ -68,20 +60,13 @@ export default function Page() {
                         </div>
 
                         <div className="card-info-item">
-                            <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
-                            <p>{movie.release_date}</p>
-                            <p><strong>Runtime:</strong> {movie.runtime} minutes</p>
-                            <p>
-                                <strong>Language:</strong> {movie.spoken_languages.map((lang) => lang.english_name).join(", ")}
-                            </p>
-                            <p><strong>Popularity:</strong> {movie.popularity}</p>
-                            <p>
-                                <strong>Countries:</strong> {movie.production_countries.map((country) => country.name).join(", ")}
-                            </p>
-                            <p>
-                                <strong>Companies:</strong> {movie.production_companies.map((company) => company.name).join(", ")}
-                            </p>
-                            <p className="overview-item">{movie.overview}</p>
+                            <p><i className="bi bi-tags-fill"></i> {movie.genres.map((genre) => genre.name).join(", ")}</p>
+                            <p><i className="bi bi-calendar2-week-fill"></i> {movie.release_date}</p>
+                            <p><i className="bi bi-clock-fill"></i> {movie.runtime} minutes</p>
+                            <p><i className="bi bi-globe2"></i> {movie.spoken_languages.map((lang) => lang.english_name).join(", ")}</p>
+                            <p><i className="bi bi-star-fill"></i> {movie.popularity}</p>
+                            <p><i className="bi bi-geo-alt-fill"></i> {movie.production_countries.map((country) => country.name).join(", ")}</p>
+                            <p><i className="bi bi-building-fill"></i> {movie.production_companies.map((company) => company.name).join(", ")}</p>
                         </div>
                     </div>
                 </div>
@@ -111,10 +96,10 @@ export default function Page() {
                                     />
                                 ) : (
                                     <div className="cast-photo-placeholder">
-                                        <span>Photo</span>
+                                        <span><i className="bi bi-person-circle"></i></span>
                                     </div>
                                 )}
-                                <p><strong>{member.name}</strong> as {member.character}</p>
+                                <p><strong>{member.name}</strong> <br/>{member.character}</p>
                             </li>
                         ))}
                     </ul>
