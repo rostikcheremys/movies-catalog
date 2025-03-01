@@ -1,15 +1,19 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import { useParams } from "next/navigation";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page() {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);
     const [trailer, setTrailer] = useState(null);
     const [cast, setCast] = useState([]);
-    const [crew, setCrew] = useState([]);
-    const [reviews, setReviews] = useState([]);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isPlayButtonHovered, setIsPlayButtonHovered] = useState(false);
+
+
+    const trailerRef = useRef(null);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -31,22 +35,42 @@ export default function Page() {
             .then((res) => res.json())
             .then((data) => {
                 setCast(data.cast);
-                setCrew(data.crew);
             });
     }, [id]);
 
     if (!movie) return <p>Loading...</p>;
+
+    const scrollToTrailer = () => {
+        if (trailerRef.current) {
+            trailerRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
     return (
         <div className="container">
             <div className="card-body-item">
                 <div className="card-container">
                     <div className="image-container">
-                        <img
-                            className="img-item"
-                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                            alt={movie.title || "No title available"}
-                        />
+                        <div className="position-relative" onMouseEnter={() => setIsHovered(true)}
+                             onMouseLeave={() => setIsHovered(false)}>
+                            {isHovered && (
+                                <div
+                                    className="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center"
+                                    onMouseEnter={() => setIsPlayButtonHovered(true)}
+                                    onMouseLeave={() => setIsPlayButtonHovered(false)}
+                                >
+                                    <div className="play-button">
+                                        <div className="play-icon"></div>
+                                    </div>
+                                </div>
+                            )}
+                            <img
+                                className={`img-item ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
+                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                alt={movie.title || "No title available"}
+                                onClick={scrollToTrailer}
+                            />
+                        </div>
                     </div>
 
                     <div className={`vote-average-item
@@ -84,7 +108,7 @@ export default function Page() {
             <div className="overview-container">
                 <h3>Overview</h3>
                 <div className="line-item"></div>
-                <p>{movie.overview}</p>
+                <p ref={trailerRef}>{movie.overview}</p>
             </div>
 
             {trailer && (
