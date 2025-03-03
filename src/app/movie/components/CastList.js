@@ -10,7 +10,7 @@ export default function CastList({ cast }) {
             <div className="overflow-auto">
                 <ul className="cast-list">
                     {cast.map((member) => (
-                        <li key={member.cast_id} className="cast-item">
+                        <li key={member.cast_id || member.id} className="cast-item">
                             {member.profile_path ? (
                                 <img className="cast-photo"
                                      src={`https://image.tmdb.org/t/p/w185${member.profile_path}`}
