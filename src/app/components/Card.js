@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Card(props) {
     const { vote_average, title, name, poster_path, id, adult, release_date, first_air_date } = props;
@@ -12,8 +13,7 @@ export default function Card(props) {
 
     return (
         <div className="card custom-card-body-color custom-rounded d-flex flex-column justify-content-between h-100">
-            <div className="position-relative" onMouseEnter={() => setIsHovered(true)}
-                 onMouseLeave={() => setIsHovered(false)}>
+            <div className="image-wrapper position-relative" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                 {isHovered && (
                     <div
                         className="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center"
@@ -25,11 +25,25 @@ export default function Card(props) {
                         </div>
                     </div>
                 )}
-                <img
-                    src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                    className={`w-100 h-auto object-fit-cover border-to custom-card-img ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
-                    alt={itemTitle}
-                />
+
+                {poster_path ? (
+                    <img
+                        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                        className={`img-card ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
+                        alt={itemTitle}
+                    />
+                ) : (
+                    <div className="image-placeholder">
+                        <Image
+                            src="/image-placeholder.png"
+                            className={`img-card ${isHovered && !isPlayButtonHovered ? "hovered" : ""}`}
+                            alt={itemTitle}
+                            width={500}
+                            height={750}
+                        />
+                        <i className="bi bi-film"></i>
+                    </div>
+                )}
             </div>
 
             <div

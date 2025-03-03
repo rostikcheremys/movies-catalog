@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
-import Image from "@/app/movie/components/Image";
+import ImageCard from "@/app/movie/components/ImageCard";
 import InfoList from "@/app/movie/components/InfoList";
 import CastList from "@/app/movie/components/CastList";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
@@ -50,7 +50,7 @@ export default function Page() {
         <div className="container">
             <div className="card-body-item">
                 <div className="card-container">
-                    <Image movie={movie} scrollToTrailer={scrollToTrailer} />
+                    <ImageCard movie={movie} scrollToTrailer={scrollToTrailer} />
                     <VoteAverage movie={movie} />
                     <InfoList movie={movie} />
                 </div>
