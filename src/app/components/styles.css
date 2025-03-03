@@ -6,7 +6,7 @@
     background-color: #252627;
     border-radius: 10px;
     width: 90%;
-    margin: 144px auto 0 auto;
+    margin: 144px auto 44px auto;
 }
 
 .card-container {
@@ -119,7 +119,7 @@
     background-color: #252627;
     border-radius: 10px;
     width: 90%;
-    margin: 44px auto 0 auto;
+    margin: 0 auto 44px auto;
     padding: 20px 30px;
     color: white;
     font-size: 18px;
@@ -141,7 +141,7 @@
     background-color: #252627;
     border-radius: 10px;
     width: 90%;
-    margin: 44px auto 0 auto;
+    margin: 0 auto 44px auto;
     padding: 20px 30px;
     color: white;
 }
