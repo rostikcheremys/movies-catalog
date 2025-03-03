@@ -9,7 +9,7 @@ export default function NavBar() {
     const [activePath, setActivePath] = useState("");
     const [query, setQuery] = useState("");
     const router = useRouter();
-    const activeItem = (path) => activePath === path ? {color: "red"} : {color: "white"};
+    const activeItem = (path) => activePath === path ? {color: "#da202f"} : {color: "white"};
 
     useEffect( () => {
         setActivePath(pathName)

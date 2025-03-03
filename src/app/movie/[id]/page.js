@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
@@ -11,8 +11,7 @@ export default function Page() {
     const [cast, setCast] = useState([]);
     const [isHovered, setIsHovered] = useState(false);
     const [isPlayButtonHovered, setIsPlayButtonHovered] = useState(false);
-
-
+    const [loading, setLoading] = useState(true);
     const trailerRef = useRef(null);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -20,25 +19,29 @@ export default function Page() {
     useEffect(() => {
         if (!id) return;
 
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
-            .then((res) => res.json())
-            .then((data) => setMovie(data));
-
-        fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`)
-            .then((res) => res.json())
-            .then((data) => {
-                const officialTrailer = data.results.find(video => video.type === "Trailer" && video.site === "YouTube");
-                if (officialTrailer) setTrailer(officialTrailer.key);
-            });
-
-        fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setCast(data.cast);
-            });
+        Promise.all([
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`).then(res => res.json()),
+            fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}`).then(res => res.json()),
+            fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`).then(res => res.json())
+        ]).then(([movieData, videoData, castData]) => {
+            setMovie(movieData);
+            const officialTrailer = videoData.results.find(video => video.type === "Trailer" && video.site === "YouTube");
+            if (officialTrailer) setTrailer(officialTrailer.key);
+            setCast(castData.cast);
+            setLoading(false)
+        });
     }, [id]);
 
-    if (!movie) return <p>Loading...</p>;
+
+    if (loading) {
+        return (
+            <div className="loading-item">
+                <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        );
+    }
 
     const scrollToTrailer = () => {
         if (trailerRef.current) {
@@ -55,7 +58,7 @@ export default function Page() {
                              onMouseLeave={() => setIsHovered(false)}>
                             {isHovered && (
                                 <div
-                                    className="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center"
+                                    className="play-button-container"
                                     onMouseEnter={() => setIsPlayButtonHovered(true)}
                                     onMouseLeave={() => setIsPlayButtonHovered(false)}
                                 >
@@ -86,7 +89,7 @@ export default function Page() {
                         <div className="line-item-static"></div>
 
                         <div className="card-info-item">
-                            <p><i className="bi bi-star-fill"></i> {movie.popularity}</p>
+                            <p><i className="bi bi-star-fill"></i> {Math.round(movie.popularity)}</p>
                             <p><i className="bi bi-tags-fill"></i> {movie.genres.map((genre) => genre.name).join(", ")}
                             </p>
                             <p><i className="bi bi-clock-fill"></i> {movie.runtime} minutes</p>
@@ -105,11 +108,13 @@ export default function Page() {
                 </div>
             </div>
 
-            <div className="overview-container">
-                <h3>Overview</h3>
-                <div className="line-item"></div>
-                <p ref={trailerRef}>{movie.overview}</p>
-            </div>
+            {movie.overview && (
+                <div className="overview-container">
+                    <h3>Overview</h3>
+                    <div className="line-item"></div>
+                    <p ref={trailerRef}>{movie.overview}</p>
+                </div>
+            )}
 
             {trailer && (
                 <div className="trailer-container">
@@ -119,31 +124,32 @@ export default function Page() {
                 </div>
             )}
 
-            <div className="cast-container">
-                <h3>Top Billed Cast</h3>
-                <div className="line-item"></div>
-                <div className="overflow-auto">
-                    <ul className="cast-list">
-                        {cast.map((member) => (
-                            <li key={member.cast_id} className="cast-item">
-                                {member.profile_path ? (
-                                    <img
-                                        className="cast-photo"
-                                        src={`https://image.tmdb.org/t/p/w185${member.profile_path}`}
-                                        alt={member.name}
-                                    />
-                                ) : (
-                                    <div className="cast-photo-placeholder">
-                                        <span><i className="bi bi-person-circle"></i></span>
-                                    </div>
-                                )}
-                                <p><strong>{member.name}</strong> <br/>{member.character}</p>
-                            </li>
-                        ))}
-                    </ul>
+            {cast.length > 0 && (
+                <div className="cast-container">
+                    <h3>Top Billed Cast</h3>
+                    <div className="line-item"></div>
+                    <div className="overflow-auto">
+                        <ul className="cast-list">
+                            {cast.map((member) => (
+                                <li key={member.cast_id} className="cast-item">
+                                    {member.profile_path ? (
+                                        <img
+                                            className="cast-photo"
+                                            src={`https://image.tmdb.org/t/p/w185${member.profile_path}`}
+                                            alt={member.name}
+                                        />
+                                    ) : (
+                                        <div className="cast-photo-placeholder">
+                                            <span><i className="bi bi-person-circle"></i></span>
+                                        </div>
+                                    )}
+                                    <p><strong>{member.name}</strong> <br/>{member.character}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-
+            )}
         </div>
     );
 }
