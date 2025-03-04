@@ -14,7 +14,7 @@ import VoteAverage from "@/app/movie/components/VoteAverage";
 
 export default function Page() {
     const { id } = useParams();
-    const [movie, setMovie] = useState(null);
+    const [tv, setTV] = useState(null);
     const [trailer, setTrailer] = useState(null);
     const [cast, setCast] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ export default function Page() {
             fetch(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}`).then(res => res.json()),
             fetch(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`).then(res => res.json())
         ]).then(([movieData, videoData, castData]) => {
-            setMovie(movieData);
+            setTV(movieData);
             const officialTrailer = videoData.results.find(video => video.type === "Trailer" && video.site === "YouTube");
             if (officialTrailer) setTrailer(officialTrailer.key);
             setCast(castData.cast);
@@ -50,14 +50,14 @@ export default function Page() {
         <div className="container">
             <div className="card-body-item">
                 <div className="card-container">
-                    <ImageCard movie={movie} scrollToTrailer={scrollToTrailer} />
-                    <VoteAverage movie={movie} />
-                    <InfoList movie={movie} />
+                    <ImageCard item={tv} customClass="img-item" scrollToTrailer={scrollToTrailer}/>
+                    <VoteAverage item={tv} />
+                    <InfoList item={tv} />
                 </div>
             </div>
 
-            <Overview overview={movie.overview} trailerRef={trailerRef} />
-            <Trailer trailer={trailer} movieTitle={movie.name} />
+            <Overview overview={tv.overview} trailerRef={trailerRef} />
+            <Trailer trailer={trailer} movieTitle={tv.name} />
             <CastList cast={cast} />
         </div>
     );

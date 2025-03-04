@@ -50,9 +50,9 @@ export default function Page() {
         <div className="container">
             <div className="card-body-item">
                 <div className="card-container">
-                    <ImageCard movie={movie} scrollToTrailer={scrollToTrailer}/>
-                    <VoteAverage movie={movie}/>
-                    <InfoList movie={movie}/>
+                    <ImageCard item={movie} customClass="img-item" scrollToTrailer={scrollToTrailer}/>
+                    <VoteAverage item={movie}/>
+                    <InfoList item={movie}/>
                 </div>
             </div>
 

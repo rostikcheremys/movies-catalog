@@ -5,6 +5,7 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 import Card from "@/app/components/Card";
 import Pagination from "@/app/components/Pagination";
 import {useEffect, useRef, useState} from "react";
+import {log} from "next/dist/server/typescript/utils";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -42,7 +43,8 @@ export default function Page() {
         <div>
             <div className="row row-cols-1 row-cols-md-4 mx-3 custom-margin-top">
                 {cardsList.map((item) => (
-                    <Card key={item.id} {...item} />
+                    console.log("")
+                    /*<Card key={item.id} {...item} />*/
                 ))}
             </div>
 
