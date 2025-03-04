@@ -5,7 +5,6 @@ import {useState, useEffect, useRef} from "react";
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
-import Adult from "@/app/movie/components/Adult";
 import Title from "@/app/movie/components/Title";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
@@ -52,7 +51,6 @@ export default function Page() {
                         <div className="card">
                             <ImageCard item={item} customClass="img-card" scrollToTrailer={null}/>
                             <VoteAverage item={item}/>
-                            <Adult item={item}/>
                             <Title item={item}/>
                         </div>
                     </div>

@@ -38,6 +38,10 @@
     padding: 4px;
 }
 
+.bg-orange {
+    background-color: #ff4800;
+}
+
 .content-container {
     flex-grow: 1;
     color: white;
@@ -249,7 +253,7 @@
         top: 0;
         left: 0;
     }
-
+    
     .content-container {
         text-align: left;
         width: 100%;
@@ -328,18 +332,6 @@
     opacity: 50%;
 }
 
-.adult-item {
-    font-size: 14px;
-    border-radius: 0 10px 0 0;
-    background-color: red;
-    color: white;
-    inset-inline-end: 0;
-    top: 0;
-    padding: 4px;
-    font-weight: bold;
-    position: absolute;
-}
-
 .play-button-container {
     position: absolute;
     top: 50%;
@@ -406,11 +398,6 @@
 
 
 
-.card-body .card-title, .card-body .card-text {
-
-}
-
-
 
 .custom-navbar-color, .custom-card-body-color, .custom-pagination-color, .custom-footer-color, .custom-body-color {
     background-color: #252627;
@@ -449,9 +436,7 @@
 
 
 
-.bg-orange {
-    background-color: #ff4800;
-}
+
 
 .custom-input {
     width: 400px;

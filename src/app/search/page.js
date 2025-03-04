@@ -1,11 +1,9 @@
 'use client'
 
 import {useSearchParams} from "next/navigation";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
-import Card from "@/app/components/Card";
-import Pagination from "@/app/components/Pagination";
 import {useEffect, useRef, useState} from "react";
-import {log} from "next/dist/server/typescript/utils";
+import Pagination from "@/app/components/Pagination";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -19,7 +17,6 @@ export default function Page() {
     const searchApi = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&include_adult=false&language=en-US&query=${query}`;
 
     const getCards = (page = 1) => {
-
         fetch(`${searchApi}&page=${page}`)
             .then(res => res.json())
             .then(json => {

@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
-
 import ImageCard from "@/app/movie/components/ImageCard";
 import InfoList from "@/app/movie/components/InfoList";
 import CastList from "@/app/movie/components/CastList";
@@ -11,6 +9,7 @@ import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import Overview from "@/app/movie/components/Overview";
 import Trailer from"@/app/movie/components/Trailer";
 import VoteAverage from "@/app/movie/components/VoteAverage";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page() {
     const { id } = useParams();
