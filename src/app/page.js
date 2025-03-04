@@ -49,7 +49,7 @@ export default function Page() {
 
     return (
         <div>
-            <div className="row row-cols-1 row-cols-md-4 mx-3 g-4 custom-margin-top">
+            <div className="row row-cols-1 row-cols-md-4 g-4">
                 {cardsList.map((item) => (
                     <div key={item.id} className="col" onClick={() => handleCardClick(item.id)}>
                         <div className="card">

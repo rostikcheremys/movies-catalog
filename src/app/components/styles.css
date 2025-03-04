@@ -3,6 +3,10 @@
     cursor: pointer;
 }
 
+.row {
+    margin: 120px 12px 0 12px;
+}
+
 .card-body-item {
     display: flex;
     flex-direction: row;
@@ -418,20 +422,8 @@
     border-radius: 0 0 10px 10px;
 }
 
-
-
-
-
-
-.custom-mt-card-item {
-    margin-top: 144px;
-}
-
-
-
-
 .custom-margin-top {
-    margin-top: 120px;
+
 }
 
 .custom-min-height {

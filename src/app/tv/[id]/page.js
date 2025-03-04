@@ -49,9 +49,12 @@ export default function Page() {
         <div className="container">
             <div className="card-body-item">
                 <div className="card-container">
-                    <ImageCard item={tv} customClass="img-item" scrollToTrailer={scrollToTrailer}/>
-                    <VoteAverage item={tv} />
-                    <InfoList item={tv} />
+                    <div className="image-container">
+                        <ImageCard item={tv} customClass="img-item" scrollToTrailer={scrollToTrailer}/>
+                    </div>
+
+                    <VoteAverage item={tv}/>
+                    <InfoList item={tv}/>
                 </div>
             </div>
 
