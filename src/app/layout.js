@@ -12,7 +12,7 @@ import Footer from '@/app/components/Footer';
 export default function DashboardLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className="custom-background-color" suppressHydrationWarning>
+            <body suppressHydrationWarning>
                 <NavBar/>
                 <main>{children}</main>
                 <Footer/>

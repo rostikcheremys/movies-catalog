@@ -3,14 +3,72 @@ html, body {
     margin: 0;
     display: flex;
     flex-direction: column;
+    background-color: #1d1e20;
+}
+
+.navbar {
+    min-height: 100px;
+    background-color: #252627;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.container-fluid {
+    background-color: #252627;
+}
+
+.name-item {
+    text-decoration: none;
+    margin-inline-start: 12px;
+    margin-inline-end: 8px;
+    font-size: 1.75rem;
+    color: #da202f;
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    margin-inline-end: 12px;
+}
+
+.collapse .navbar-collapse {
+    margin: 12px;
+}
+
+.navbar-nav {
+    margin-inline-end: auto;
+    font-size: 1.5rem;
+}
+
+.nav-item {
+    margin-inline-start: 12px;
+}
+
+.nav-link {
+    transition: 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #da202f;
+}
+
+.nav-link.active {
+    color: #da202f;
+    font-weight: bold;
+}
+
+.form-item {
+    display: flex;
+    padding: 8px 0;
+    margin-inline-end: 12px;
+    margin-inline-start: 12px;
 }
 
 main {
     flex: 1;
 }
-
-
-
 
 .footer-container {
     height: 100px;

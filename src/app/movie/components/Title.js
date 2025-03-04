@@ -2,7 +2,7 @@
 
 export default function Title({ item }) {
     return (
-        <div className="card-body title-container">
+        <div className="title-container card-body">
             <h5 className="title-item">
                 {item.title || item.name || "No title available"}
             </h5>
