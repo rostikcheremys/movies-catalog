@@ -56,7 +56,7 @@ export default function Page() {
             </div>
 
             <Overview overview={movie.overview} trailerRef={trailerRef}/>
-            <Trailer trailer={trailer} movieTitle={movie.title}/>
+            <Trailer trailer={trailer} itemTitle={movie.title}/>
             <CastList cast={cast}/>
         </div>
     );

@@ -47,7 +47,7 @@ export default function Page() {
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4 mx-3 custom-margin-top">
                 {cardsList.map((item) => (
-                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id)} style={{cursor: 'pointer'}}>
+                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id)}>
                         <div className="card">
                             <ImageCard item={item} customClass="img-card" scrollToTrailer={null}/>
                             <VoteAverage item={item}/>

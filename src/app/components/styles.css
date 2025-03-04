@@ -1,4 +1,7 @@
 /*[id]/page.js*/
+.cards {
+    cursor: pointer;
+}
 
 .card-body-item {
     display: flex;
@@ -16,6 +19,7 @@
 
 .image-container {
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .img-item {
@@ -253,7 +257,7 @@
         top: 0;
         left: 0;
     }
-    
+
     .content-container {
         text-align: left;
         width: 100%;
@@ -298,6 +302,7 @@
     height: 100%;
     background-color: #252627;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .image-wrapper {

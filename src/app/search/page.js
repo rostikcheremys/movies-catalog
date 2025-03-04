@@ -1,9 +1,12 @@
 'use client'
 
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect, useRef, useState} from "react";
 import Pagination from "@/app/components/Pagination";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import ImageCard from "@/app/movie/components/ImageCard";
+import VoteAverage from "@/app/movie/components/VoteAverage";
+import Title from "@/app/movie/components/Title";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -26,22 +29,33 @@ export default function Page() {
             });
     };
 
-    const prevApiRef = useRef();
+    const previousSearchApi = useRef();
 
     useEffect(() => {
-        if (prevApiRef.current !== searchApi) {
-            prevApiRef.current = searchApi;
+        if (previousSearchApi.current !== searchApi) {
+            previousSearchApi.current = searchApi;
             setCurrentPage(1);
             getCards(1);
         }
     }, [searchApi]);
 
+    const router = useRouter();
+
+    const handleCardClick = (id, mediaType) => {
+        router.push(`/${mediaType}/${id}`);
+    };
+
     return (
         <div>
-            <div className="row row-cols-1 row-cols-md-4 mx-3 custom-margin-top">
+            <div className="row row-cols-1 row-cols-md-4 mx-3 g-4 custom-margin-top">
                 {cardsList.map((item) => (
-                    console.log("")
-                    /*<Card key={item.id} {...item} />*/
+                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id, item.media_type)}>
+                        <div className="card">
+                            <ImageCard item={item} customClass="img-card" scrollToTrailer={null}/>
+                            <VoteAverage item={item}/>
+                            <Title item={item}/>
+                        </div>
+                    </div>
                 ))}
             </div>
 
