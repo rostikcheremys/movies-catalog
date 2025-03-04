@@ -27,6 +27,7 @@ html, body {
     font-size: 1.75rem;
     color: #da202f;
     font-weight: bold;
+    padding: 8px 0;
 }
 
 .navbar-toggler {
