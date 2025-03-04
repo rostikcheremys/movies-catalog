@@ -7,6 +7,7 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
+import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -15,21 +16,24 @@ export default function Page() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const previousSearchApi = useRef();
+    const router = useRouter();
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const searchApi = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&include_adult=false&language=en-US&query=${query}`;
 
     const getCards = (page = 1) => {
+        setLoading(true);
         fetch(`${searchApi}&page=${page}`)
             .then(res => res.json())
             .then(json => {
                 console.log(json);
                 setCardsList(json.results || []);
                 setTotalPages(json.total_pages || 1);
+                setLoading(false);
             });
     };
-
-    const previousSearchApi = useRef();
 
     useEffect(() => {
         if (previousSearchApi.current !== searchApi) {
@@ -39,11 +43,11 @@ export default function Page() {
         }
     }, [searchApi]);
 
-    const router = useRouter();
-
     const handleCardClick = (id, mediaType) => {
         router.push(`/${mediaType}/${id}`);
     };
+
+    if (loading) return <LoadingSpinner />;
 
     return (
         <div>
