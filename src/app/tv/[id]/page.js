@@ -37,6 +37,7 @@ export default function Page() {
         });
     }, [id]);
 
+
     if (loading) return <LoadingSpinner />;
 
     const scrollToTrailer = () => {

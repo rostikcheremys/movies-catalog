@@ -3,11 +3,12 @@
 import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect, useRef, useState} from "react";
 import Pagination from "@/app/components/Pagination";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
+import NotFound from "@/app/movie/components/NotFound";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -44,8 +45,13 @@ export default function Page() {
     }, [searchApi]);
 
     const handleCardClick = (id, mediaType) => {
-        router.push(`/${mediaType}/${id}`);
-    };
+        if (mediaType === "movie" || mediaType === "tv") {
+            router.push(`/${mediaType}/${id}`);
+        } else {
+            router.push("/not-found");
+        }
+    }
+
 
     if (loading) return <LoadingSpinner />;
 

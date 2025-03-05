@@ -46,7 +46,7 @@ export default function NavBar() {
                                 <i className="bi bi-bookmark-fill"></i></Link>
                         </li>
                         <li className="action-icon user-item">
-                            <Link className={`nav-link ${pathname === "/tv" ? "active" : ""}`} href="/tv">
+                            <Link className={`nav-link ${pathname === "/auth" ? "active" : ""}`} href="/auth">
                                 <i className="bi bi-person-fill"></i></Link>
                         </li>
                     </ul>

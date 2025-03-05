@@ -7,7 +7,6 @@
 }
 
 .card-body-item {
-    display: flex;
     flex-direction: row;
     background-color: #252627;
     border-radius: 10px;
@@ -122,6 +121,15 @@
 
 .spinner-border {
     color: #da202f;
+}
+
+.not-found {
+    text-align: center;
+    padding: 20px;
+}
+.not-found-gif {
+    max-width: 100%;
+    height: auto;
 }
 
 .overview-container {
@@ -429,6 +437,26 @@
 .pagination .page-item .page-link[aria-label="Previous"]:hover,
 .pagination .page-item .page-link[aria-label="Next"]:hover {
     background-color: #1d1e20;
+}
+
+.error-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.not-found-gif {
+    border-radius: 10px;
+}
+
+.error-item h1 {
+    padding: 20px;
+    font-weight: bold;
+    color: #da202f;
 }
 
 
