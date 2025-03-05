@@ -18,16 +18,16 @@ html, body {
 
 .container-fluid {
     background-color: #252627;
+    padding: 0 13px;
 }
 
 .name-item {
     text-decoration: none;
-    margin-inline-start: 12px;
-    margin-inline-end: 8px;
     font-size: 1.75rem;
     color: #da202f;
     font-weight: bold;
-    padding: 8px 0;
+    padding: 8px 8px 8px 0;
+    margin-inline-start: 12px;
 }
 
 .navbar-toggler {
@@ -65,6 +65,33 @@ html, body {
     padding: 8px 0;
     margin-inline-end: 12px;
     margin-inline-start: 12px;
+    width: 25%;
+    min-width: 250px;
+}
+
+@media (max-width: 992px) {
+    .form-item{
+        margin-inline-end: 12px;
+        margin-inline-start: 12px;
+        width: auto;
+    }
+}
+.form-control {
+
+}
+
+.navbar-action {
+    display: flex;
+    list-style: none;
+    color: white;
+    font-size: 30px;
+    padding: 0;
+    margin: auto 0 auto auto;
+    justify-content: end;
+}
+
+.action-icon {
+    padding: 8px;
 }
 
 main {

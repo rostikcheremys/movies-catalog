@@ -30,13 +30,26 @@ export default function NavBar() {
                             <Link className={`nav-link ${pathname === "/" ? "active" : ""}`} href="/">Movies</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${pathname === "/tv" ? "active" : ""}`} href="/tv">TV Shows</Link>
+                            <Link className={`nav-link ${pathname === "/tv" ? "active" : ""}`} href="/tv">TV
+                                Shows</Link>
                         </li>
                     </ul>
+
                     <form className="form-item" role="search">
                         <input className="form-control" type="search" placeholder="Search.." aria-label="Search" value={query}
                                onChange={(e) => setQuery(e.target.value)}/>
                     </form>
+
+                    <ul className="navbar-action">
+                        <li className="action-icon mark-favorites-item">
+                            <Link className={`nav-link ${pathname === "/" ? "active" : ""}`} href="/">
+                                <i className="bi bi-bookmark-fill"></i></Link>
+                        </li>
+                        <li className="action-icon user-item">
+                            <Link className={`nav-link ${pathname === "/tv" ? "active" : ""}`} href="/tv">
+                                <i className="bi bi-person-fill"></i></Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
