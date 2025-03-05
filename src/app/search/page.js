@@ -7,7 +7,6 @@ import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
-import NotFound from "@/app/movie/components/NotFound";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page() {
