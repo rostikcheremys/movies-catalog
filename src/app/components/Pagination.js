@@ -40,17 +40,17 @@ export default function Pagination({totalPages, currentPage, setCurrentPage, fet
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
-                    {generatePageNumbers().map((page, index) => (
-                        <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
-                            {page === "..." ? (
-                                <span className="page-link">...</span>
-                            ) : (
-                                <a className="page-link" onClick={() => handlePageChange(page)}>
-                                    {page}
-                                </a>
-                            )}
-                        </li>
-                    ))}
+                {generatePageNumbers().map((page, index) => (
+                    <li key={index} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+                        {page === "..." ? (
+                            <span className="page-link">...</span>
+                        ) : (
+                            <a className="page-link" onClick={() => handlePageChange(page)}>
+                                {page}
+                            </a>
+                        )}
+                    </li>
+                ))}
                 <li className="page-item">
                     <a className="page-link" onClick={() => handlePageChange(currentPage + 1)}
                        aria-label="Next">

@@ -60,7 +60,7 @@ html, body {
     font-weight: bold;
 }
 
-.form-item {
+.search-item {
     display: flex;
     padding: 8px 0;
     margin-inline-end: 12px;
@@ -70,14 +70,11 @@ html, body {
 }
 
 @media (max-width: 992px) {
-    .form-item{
+    .search-item{
         margin-inline-end: 12px;
         margin-inline-start: 12px;
         width: auto;
     }
-}
-.form-control {
-
 }
 
 .navbar-action {

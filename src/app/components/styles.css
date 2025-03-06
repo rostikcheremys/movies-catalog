@@ -459,6 +459,96 @@
     color: #da202f;
 }
 
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    margin: 144px auto 44px auto;
+}
+
+.card-auth {
+    background-color: #252627;
+    color: white;
+    border-radius: 10px;
+}
+
+.card-body-auth {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-body-auth h4 {
+    font-weight: bold;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.item-form {
+    position: relative;
+    margin-bottom: 16px;
+    border-radius: 10px;
+}
+
+.item-form .form-control {
+    padding-right: 36px;
+}
+
+.item-form .bi {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.item-form input.form-control, .item-form select.form-select {
+    border: 1px solid #ced4da;
+    background-color: #252627;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+    color: white;
+}
+
+.item-form.error input.form-control {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.1); /* легкий червоний фон */
+}
+
+.item-form input::placeholder {
+    color: #ced4da;
+    opacity: 1;
+}
+
+.error-message {
+    color: #da202f;
+    font-weight: bold;
+}
+
+.form-check-label{
+    padding-left: 10px;
+}
+
+.btn-sign-in {
+    background-color: #252627;
+    border-radius: 10px;
+    border: 1px solid #da202f;
+    color: #da202f;
+    height: 40px;
+    width: 120px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.btn-sign-in:hover {
+    background-color: #da202f;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+
+
 
 
 

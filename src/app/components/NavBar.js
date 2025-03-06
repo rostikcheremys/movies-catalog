@@ -35,7 +35,7 @@ export default function NavBar() {
                         </li>
                     </ul>
 
-                    <form className="form-item" role="search">
+                    <form className="search-item" role="search">
                         <input className="form-control" type="search" placeholder="Search.." aria-label="Search" value={query}
                                onChange={(e) => setQuery(e.target.value)}/>
                     </form>
