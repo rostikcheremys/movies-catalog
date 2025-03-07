@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Page() {
-    const SignIn = () => {
+    const SignUp = () => {
         const [formData, setFormData] = useState({
             firstName: "",
             lastName: "",
@@ -71,7 +72,7 @@ export default function Page() {
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div className="card-auth">
                             <div className="card-body-auth">
-                                <h4>Sign In</h4>
+                                <h4>Sign Up</h4>
 
                                 {firstError && <p className="error-message">{firstError}</p>}
 
@@ -169,7 +170,11 @@ export default function Page() {
                                     </div>
 
                                     {/* Submit Button */}
-                                    <button type="submit" className="btn-sign-in">Sign In</button>
+                                    <button type="submit" className="btn-sign">Sign Up</button>
+                                    <p className="link-sign">Already have an account?
+                                        <Link href="/sign-in"> Sign In</Link>
+                                    </p>
+
                                 </form>
                             </div>
                         </div>
@@ -179,5 +184,5 @@ export default function Page() {
         );
     };
 
-    return <SignIn />;
+    return <SignUp />;
 }

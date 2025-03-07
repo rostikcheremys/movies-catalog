@@ -503,7 +503,7 @@
     cursor: pointer;
 }
 
-.item-form input.form-control, .item-form select.form-select {
+.item-form input.form-control, .item-form select.form-select, .search-item input.form-control{
     border: 1px solid #ced4da;
     background-color: #252627;
     border-radius: 4px;
@@ -512,11 +512,11 @@
 }
 
 .item-form.error input.form-control {
-    border-color: red;
-    background-color: rgba(255, 0, 0, 0.1); /* легкий червоний фон */
+    border-color: #da202f;
+    background-color: rgba(255, 0, 0, 0.1);
 }
 
-.item-form input::placeholder {
+.item-form input::placeholder, .search-item input::placeholder {
     color: #ced4da;
     opacity: 1;
 }
@@ -530,7 +530,7 @@
     padding-left: 10px;
 }
 
-.btn-sign-in {
+.btn-sign {
     background-color: #252627;
     border-radius: 10px;
     border: 1px solid #da202f;
@@ -539,13 +539,26 @@
     width: 120px;
     font-weight: bold;
     font-size: 16px;
+    margin-bottom: 16px;
 }
 
-.btn-sign-in:hover {
+.btn-sign:hover {
     background-color: #da202f;
     color: white;
     transition: 0.3s ease-in-out;
 }
+
+.link-sign a{
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.link-sign a:hover {
+    color: #da202f;
+    transition: 0.3s ease-in-out;
+}
+
 
 
 
