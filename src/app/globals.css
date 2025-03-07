@@ -91,6 +91,33 @@ html, body {
     padding: 8px;
 }
 
+/* Стилізація для поповера */
+
+.popover {
+    position: absolute;
+    right: 0;
+    z-index: 1200;
+    background-color: grey;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px; /* Можна змінити на потрібний розмір */
+}
+
+.popover-content p {
+    margin-bottom: 10px;
+}
+
+.popover-content button {
+}
+
+/* Додаткові стилі для кнопок */
+.popover-content button {
+    display: inline-block;
+    width: 80%;
+    text-align: center;
+}
+
+
 main {
     flex: 1;
 }

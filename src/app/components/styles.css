@@ -459,31 +459,80 @@
     color: #da202f;
 }
 
-.auth-container {
+
+
+
+.auth-container, .profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 80%;
+    width: 100%;
     margin: 144px auto 44px auto;
 }
 
-.card-auth {
+.card-auth, .card-profile {
     background-color: #252627;
     color: white;
     border-radius: 10px;
 }
 
-.card-body-auth {
-    padding: 20px;
+.card-body-auth, .card-body-profile {
+    padding: 30px;
     text-align: center;
 }
+
+.card-body-profile {
+    width: 25vw;
+    min-width: 280px;
+}
+
 
 .card-body-auth h4 {
     font-weight: bold;
     margin-bottom: 16px;
     text-transform: uppercase;
 }
+
+.card-body-profile h4 {
+    font-weight: bold;
+    margin-top: 16px;
+    text-transform: uppercase;
+}
+
+.card-body-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-body-profile .bi-person-fill {
+    font-size: 150px;
+}
+
+
+.btn-sign-profile {
+    background-color: #252627;
+    border-radius: 10px;
+    border: 1px solid white;
+    color: white;
+    height: 40px;
+    width: 120px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.btn-sign-profile:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s ease-in-out;
+}
+
+
+
+
 
 .item-form {
     position: relative;
@@ -539,7 +588,6 @@
     width: 120px;
     font-weight: bold;
     font-size: 16px;
-    margin-bottom: 16px;
 }
 
 .btn-sign:hover {
@@ -547,6 +595,7 @@
     color: white;
     transition: 0.3s ease-in-out;
 }
+
 
 .link-sign a{
     font-weight: bold;
@@ -558,6 +607,8 @@
     color: #da202f;
     transition: 0.3s ease-in-out;
 }
+
+
 
 
 

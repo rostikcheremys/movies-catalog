@@ -8,13 +8,11 @@ export default function Page() {
         const [formData, setFormData] = useState({
             email: "",
             password: "",
-            repeatPassword: "",
             termsAccepted: false,
         });
 
         const [errors, setErrors] = useState({});
         const [showPassword, setShowPassword] = useState(false);
-        const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
         const validate = () => {
             let newErrors = {};
@@ -32,11 +30,7 @@ export default function Page() {
                 newErrors.password =
                     "Password must contain at least one number, one uppercase letter, one special character, and be at least 7 characters long";
             }
-            if (!formData.repeatPassword) {
-                newErrors.repeatPassword = "Please repeat your password";
-            } else if (formData.password !== formData.repeatPassword) {
-                newErrors.repeatPassword = "Passwords do not match";
-            }
+
             if (!formData.termsAccepted) {
                 newErrors.termsAccepted = "You must accept the terms of use";
             }
@@ -66,7 +60,6 @@ export default function Page() {
 
                                 <form onSubmit={handleSubmit}>
 
-                                    {/* Email */}
                                     <div className={`item-form ${errors.email ? 'error' : ''}`}>
                                         <input
                                             type="email"
@@ -77,7 +70,6 @@ export default function Page() {
                                         />
                                     </div>
 
-                                    {/* Password */}
                                     <div className={`item-form ${errors.password ? 'error' : ''}`}>
                                         <input
                                             type={showPassword ? "text" : "password"}
@@ -88,23 +80,8 @@ export default function Page() {
                                         />
                                         <i className={`bi ${showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"}`}
                                            onClick={() => setShowPassword(!showPassword)}></i>
-
-
                                     </div>
 
-                                    {/* Repeat Password */}
-                                    <div className={`item-form ${errors.repeatPassword ? 'error' : ''}`}>
-                                        <input
-                                            type={showRepeatPassword ? "text" : "password"}
-                                            placeholder="Repeat Password"
-                                            className="form-control"
-                                            value={formData.repeatPassword}
-                                            onChange={(e) => setFormData({...formData, repeatPassword: e.target.value})}
-                                        />
-                                        <i className={`bi ${showRepeatPassword ? "bi-eye-fill" : "bi-eye-slash-fill"}`} onClick={() => setShowRepeatPassword(!showRepeatPassword)}></i>
-                                    </div>
-
-                                    {/* Terms Acceptance */}
                                     <div className={`item-form ${errors.termsAccepted ? 'error' : ''}`}>
                                         <input
                                             type="checkbox"
@@ -115,8 +92,6 @@ export default function Page() {
                                         <label className="form-check-label">I accept the terms</label>
                                     </div>
 
-
-                                    {/* Submit Button */}
                                     <button type="submit" className="btn-sign">Sign In</button>
 
                                     <p className="link-sign">Don't have an account?
