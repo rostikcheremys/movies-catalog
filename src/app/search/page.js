@@ -1,15 +1,22 @@
 'use client'
 
-import {useRouter, useSearchParams} from "next/navigation";
-import {useEffect, useRef, useState} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState, Suspense } from "react";
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page() {
+    return (
+        <Suspense fallback={<LoadingSpinner />}>
+            <SearchPage />
+        </Suspense>
+    );
+}
+
+function SearchPage() {
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
 
@@ -26,31 +33,42 @@ export default function Page() {
     const getCards = (page = 1) => {
         setLoading(true);
         fetch(`${searchApi}&page=${page}`)
-            .then(res => res.json())
-            .then(json => {
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return res.json();
+            })
+            .then((json) => {
                 console.log(json);
                 setCardsList(json.results || []);
                 setTotalPages(json.total_pages || 1);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Fetch error: ", error);
                 setLoading(false);
             });
     };
 
     useEffect(() => {
-        if (previousSearchApi.current !== searchApi) {
-            previousSearchApi.current = searchApi;
-            setCurrentPage(1);
-            getCards(1);
+        if (query.trim() !== "") {
+            if (previousSearchApi.current !== searchApi) {
+                previousSearchApi.current = searchApi;
+                setCurrentPage(1);
+                getCards(1);
+            }
         }
-    }, [searchApi]);
+    }, [searchApi, query]);
 
     const handleCardClick = (id, mediaType) => {
-        if (mediaType === "movie" || mediaType === "tv") {
+        const validMediaTypes = ["movie", "tv"];
+        if (validMediaTypes.includes(mediaType)) {
             router.push(`/${mediaType}/${id}`);
         } else {
             router.push("/not-found");
         }
-    }
-
+    };
 
     if (loading) return <LoadingSpinner />;
 
@@ -60,15 +78,15 @@ export default function Page() {
                 {cardsList.map((item) => (
                     <div key={item.id} className="col" onClick={() => handleCardClick(item.id, item.media_type)}>
                         <div className="card">
-                            <ImageCard item={item} customClass="img-card" scrollToTrailer={null}/>
-                            <VoteAverage item={item}/>
-                            <Title item={item}/>
+                            <ImageCard item={item} customClass="img-card" scrollToTrailer={null} />
+                            <VoteAverage item={item} />
+                            <Title item={item} />
                         </div>
                     </div>
                 ))}
             </div>
 
-            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} fetch={getCards}/>
+            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} fetch={getCards} />
         </div>
     );
 }

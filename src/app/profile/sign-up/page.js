@@ -1,16 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
-import bcrypt from 'bcryptjs'; // Додаємо бібліотеку для хешування пароля
+import bcrypt from 'bcryptjs';
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_KEY
 );
 
-export default function AuthPage() {
+export default function Page() {
     const router = useRouter();
     const [formData, setFormData] = useState({
         email: '',
@@ -22,24 +22,6 @@ export default function AuthPage() {
         answer: ''
     });
     const [error, setError] = useState(null);
-    const [user, setUser] = useState(null);
-    const [profile, setProfile] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            setUser(user);
-            if (user) {
-                const { data: profileData } = await supabase
-                    .from('profiles')
-                    .select('*')
-                    .eq('id', user.id)
-                    .single();
-                setProfile(profileData);
-            }
-        };
-        fetchUser();
-    }, []);
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -50,62 +32,37 @@ export default function AuthPage() {
             return;
         }
 
-        // Хешуємо пароль
         const hashedPassword = await bcrypt.hash(formData.password, 10);
 
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
-            password: formData.password
+            password: formData.password,
+        }, {
+            redirectTo: 'http://localhost:3000/profile/sign-in'
         });
+
         if (error) {
             setError(error.message);
         } else {
             if (data.user) {
-                // Вставляємо новий профіль разом з хешем пароля
                 await supabase.from('profiles').insert([
                     {
                         id: data.user.id,
                         first_name: formData.firstName,
                         last_name: formData.lastName,
-                        email: formData.email, // Додаємо email для зручності
-                        password_hash: hashedPassword, // Зберігаємо хеш пароля
+                        email: formData.email,
+                        password_hash: hashedPassword,
                         secret_question: formData.secretQuestion,
                         answer: formData.answer
                     }
                 ]);
             }
-            alert('Check your email to confirm your account!');
+            router.push('/profile/callback')
         }
-    };
-
-    const handleSignIn = async (e) => {
-        e.preventDefault();
-        setError(null);
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: formData.email,
-            password: formData.password
-        });
-        if (error) {
-            setError(error.message);
-        } else {
-            router.push('/profile');
-        }
-    };
-
-    const handleSignOut = async () => {
-        await supabase.auth.signOut();
-        setUser(null);
-        setProfile(null);
     };
 
     return (
         <div className="container">
-            {user ? (
-                <div>
-                    <h4>Welcome, {profile?.first_name || user.email}!</h4>
-                    <button onClick={handleSignOut}>Sign Out</button>
-                </div>
-            ) : (
                 <div className="container">
                     <div className="auth-container">
                         <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -203,7 +160,6 @@ export default function AuthPage() {
                         </div>
                     </div>
                 </div>
-            )}
         </div>
     );
 }

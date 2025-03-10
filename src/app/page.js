@@ -10,12 +10,10 @@ import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/post
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 
 export default function Page() {
-
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const previousMovieApi = useRef();
     const router = useRouter();
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -35,11 +33,8 @@ export default function Page() {
     };
 
     useEffect(() => {
-        if (previousMovieApi.current !== movieApi) {
-            previousMovieApi.current = movieApi;
-            getCards(currentPage);
-        }
-    }, [movieApi]);
+        getCards(currentPage);
+    }, [currentPage]);
 
     const handleCardClick = (id) => {
         router.push(`/movie/${id}`);

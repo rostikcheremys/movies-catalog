@@ -10,10 +10,11 @@ export default function NavBar() {
     const router = useRouter();
     const pathname = usePathname();
 
-    useEffect(() => {
+
+   /* useEffect(() => {
         console.log(query);
         query ? router.push(`/search?query=${query}`) : router.push("/");
-    }, [query, router]);
+    }, [query, router]);*/
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
