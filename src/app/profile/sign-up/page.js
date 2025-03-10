@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { useRouter } from 'next/navigation';
 import bcrypt from 'bcryptjs';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -11,7 +12,6 @@ const supabase = createClient(
 );
 
 export default function Page() {
-    const router = useRouter();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -21,11 +21,33 @@ export default function Page() {
         secretQuestion: '',
         answer: ''
     });
+
     const [error, setError] = useState(null);
+
+    const router = useRouter();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
         setError(null);
+
+        if (!formData.firstName || !formData.lastName || !formData.email || !formData.password || !formData.repeatPassword) {
+            setError("Please fill in all required fields.");
+            return;
+        }
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(formData.email)) {
+            setError("Must have a valid email format (e.g., example@domain.com).");
+            return;
+        }
+
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{7,}$/;
+
+        if (!passwordRegex.test(formData.password)) {
+            setError("Password must contain at least one number, one uppercase letter, one special character, and be at least 7 characters long.");
+            return;
+        }
 
         if (formData.password !== formData.repeatPassword) {
             setError("Passwords do not match");
@@ -42,8 +64,6 @@ export default function Page() {
             }
         });
 
-        console.log("DATA:", data);
-        console.log("ERROR:", error);
 
         if (error) {
             setError(error.message);
@@ -76,37 +96,27 @@ export default function Page() {
                                     {error && <p className="error-message">{error}</p>}
                                     <form>
                                         <div className={"item-form"}>
-                                            <input
-                                                type="text"
-                                                placeholder="First Name"
-                                                className="form-control"
-                                                value={formData.firstName}
-                                                onChange={(e) => setFormData({...formData, firstName: e.target.value})}
-                                            />
+                                            <input type="text" placeholder="First Name*" className="form-control"
+                                                   value={formData.firstName} onChange={(e) =>
+                                                setFormData({...formData, firstName: e.target.value})}/>
+                                        </div>
+
+                                        <div className={"item-form"}>
+                                            <input type="text" placeholder="Last Name*" className="form-control"
+                                                   value={formData.lastName} onChange={(e) =>
+                                                setFormData({...formData, lastName: e.target.value})}/>
+                                        </div>
+
+                                        <div className={"item-form"}>
+                                            <input type="email" placeholder="Email*" className="form-control"
+                                                   value={formData.email} onChange={(e) =>
+                                                setFormData({...formData, email: e.target.value})}/>
                                         </div>
 
                                         <div className={"item-form"}>
                                             <input
-                                                type="text"
-                                                placeholder="Last Name"
-                                                className="form-control"
-                                                value={formData.lastName}
-                                                onChange={(e) => setFormData({...formData, lastName: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className={"item-form"}>
-                                            <input
-                                                type="email"
-                                                placeholder="Email"
-                                                className="form-control"
-                                                value={formData.email}
-                                                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                            />
-                                        </div>
-                                        <div className={"item-form"}>
-                                            <input
                                                 type="password"
-                                                placeholder="Password"
+                                                placeholder="Password*"
                                                 className="form-control"
                                                 value={formData.password}
                                                 onChange={(e) => setFormData({
@@ -118,7 +128,7 @@ export default function Page() {
                                         <div className={"item-form"}>
                                             <input
                                                 type="password"
-                                                placeholder="Repeat Password"
+                                                placeholder="Repeat Password*"
                                                 className="form-control"
                                                 value={formData.repeatPassword}
                                                 onChange={(e) => setFormData({

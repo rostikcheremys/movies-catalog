@@ -1,9 +1,9 @@
 'use client'
 
-import {usePathname, useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
 import Link from "next/link";
 
+import {useEffect, useState} from "react";
+import {usePathname, useRouter} from "next/navigation";
 
 export default function NavBar() {
     const [query, setQuery] = useState("");

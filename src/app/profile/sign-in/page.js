@@ -10,13 +10,14 @@ const supabase = createClient(
 );
 
 export default function Page() {
-    const router = useRouter();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
 
     const [error, setError] = useState(null);
+
+    const router = useRouter();
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -27,11 +28,7 @@ export default function Page() {
             password: formData.password
         });
 
-        if (error) {
-            setError(error.message);
-        } else {
-            router.push('/');
-        }
+        error ? setError(error.message) : router.push('/profile/callback?success=true');
     };
 
     return (
@@ -44,22 +41,14 @@ export default function Page() {
                             {error && <p className="error-message">{error}</p>}
                             <form>
                                 <div className="item-form">
-                                    <input
-                                        type="email"
-                                        placeholder="Email"
-                                        className="form-control"
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                    />
+                                    <input type="email" placeholder="Email" className="form-control"
+                                           value={formData.email} onChange={(e) =>
+                                            setFormData({...formData, email: e.target.value})}/>
                                 </div>
                                 <div className="item-form">
-                                    <input
-                                        type="password"
-                                        placeholder="Password"
-                                        className="form-control"
-                                        value={formData.password}
-                                        onChange={(e) => setFormData({...formData, password: e.target.value})}
-                                    />
+                                    <input type="password" placeholder="Password" className="form-control"
+                                           value={formData.password} onChange={(e) =>
+                                            setFormData({...formData, password: e.target.value})}/>
                                 </div>
                                 <button className="btn-sign" onClick={handleSignIn}>Sign In</button>
                             </form>
