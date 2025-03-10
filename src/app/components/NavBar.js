@@ -10,11 +10,19 @@ export default function NavBar() {
     const router = useRouter();
     const pathname = usePathname();
 
+    useEffect(() => {
+        import('bootstrap/dist/js/bootstrap.bundle.min.js');
+    }, []);
 
-   /* useEffect(() => {
-        console.log(query);
-        query ? router.push(`/search?query=${query}`) : router.push("/");
-    }, [query, router]);*/
+    useEffect(() => {
+        if (query.trim() !== "") {
+            router.push(`/search?query=${query}`);
+        }
+    }, [query, router]);
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
@@ -37,8 +45,8 @@ export default function NavBar() {
                     </ul>
 
                     <form className="search-item" role="search">
-                        <input className="form-control" type="search" placeholder="Search.." aria-label="Search" value={query}
-                               onChange={(e) => setQuery(e.target.value)}/>
+                        <input className="form-control " type="search" placeholder="Search.." aria-label="Search" value={query}
+                               onChange={handleInputChange}/>
                     </form>
 
                     <ul className="navbar-action">
@@ -50,11 +58,6 @@ export default function NavBar() {
                             <Link className={`nav-link ${pathname === "/profile" ? "active" : ""}`} href="/profile">
                                 <i className="bi bi-person-fill"></i></Link>
                         </li>
-
-                        <li className="action-icon user-item">
-                            <Link className={`nav-link ${pathname === "/profile" ? "active" : ""}`} href="/profile"></Link>
-                        </li>
-
                     </ul>
                 </div>
             </div>

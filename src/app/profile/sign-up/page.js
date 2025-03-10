@@ -37,9 +37,13 @@ export default function Page() {
         const { data, error } = await supabase.auth.signUp({
             email: formData.email,
             password: formData.password,
-        }, {
-            redirectTo: 'http://localhost:3000/profile/sign-in'
+            options: {
+                emailRedirectTo: 'http://localhost:3000/profile/sign-in'
+            }
         });
+
+        console.log("DATA:", data);
+        console.log("ERROR:", error);
 
         if (error) {
             setError(error.message);
