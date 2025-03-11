@@ -11,6 +11,8 @@ export default function SignInForm() {
         password: ''
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+
     const { handleSignIn, error } = useSignIn ();
 
     const onSubmit = (e) => {
@@ -29,9 +31,12 @@ export default function SignInForm() {
             </div>
 
             <div className="item-form">
-                <input type="password" placeholder="Password*" className="form-control"
+                <input type={showPassword ? "text" : "password"} placeholder="Password*" className="form-control"
                        value={formData.password} onChange={(e) =>
                     setFormData({...formData, password: e.target.value})}/>
+
+                <i className={`bi ${showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"}`}
+                   onClick={() => setShowPassword(!showPassword)}></i>
             </div>
 
             <button className="btn-custom" onClick={handleSignIn}>Sign In</button>

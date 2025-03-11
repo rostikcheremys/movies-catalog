@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Callback() {
     const [isEmailSent, setIsEmailSent] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isSignIn, setIsSignIn] = useState(false);
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -14,17 +14,17 @@ export default function Callback() {
         const success = searchParams.get('success');
 
         if (success === 'true') {
-            setIsLoggedIn(true);
+            setIsSignIn(true);
         }
     }, [searchParams]);
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (isSignIn) {
             setTimeout(() => {
                 router.push('/');
             }, 3000);
         }
-    }, [isLoggedIn, router]);
+    }, [isSignIn, router]);
 
     return (
         <div className="container">
@@ -32,7 +32,7 @@ export default function Callback() {
                 <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                     <div className="card-auth">
                         <div className="card-body-auth">
-                            {isLoggedIn ? (
+                            {isSignIn ? (
                                 <div>
                                     <h4>Sign In Successful</h4>
                                     <p>Redirecting to your profile...</p>

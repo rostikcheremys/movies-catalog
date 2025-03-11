@@ -17,6 +17,9 @@ export default function SignUpForm() {
         termsAccepted: false
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+
     const { handleSignUp, error } = useSignUp();
 
     return (
@@ -42,15 +45,22 @@ export default function SignUpForm() {
             </div>
 
             <div className={"item-form"}>
-                <input type="password" placeholder="Password*" className="form-control"
+                <input type={showPassword ? "text" : "password"} placeholder="Password*" className="form-control"
                        value={formData.password} onChange={(e) =>
                     setFormData({...formData, password: e.target.value})}/>
+
+                <i className={`bi ${showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"}`}
+                   onClick={() => setShowPassword(!showPassword)}></i>
             </div>
 
             <div className={"item-form"}>
-                <input type="password" placeholder="Repeat Password*" className="form-control"
+                <input type={showRepeatPassword ? "text" : "password"} placeholder="Repeat Password*"
+                       className="form-control"
                        value={formData.repeatPassword} onChange={(e) =>
                     setFormData({...formData, repeatPassword: e.target.value})}/>
+
+                <i className={`bi ${showRepeatPassword ? "bi-eye-fill" : "bi-eye-slash-fill"}`}
+                   onClick={() => setShowRepeatPassword(!showRepeatPassword)}></i>
             </div>
 
             <div className={"item-form"}>
