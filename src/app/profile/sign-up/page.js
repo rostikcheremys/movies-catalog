@@ -1,5 +1,7 @@
 'use client';
 
+import '@/app/profile/profile.css'
+
 import SignUpForm from '@/app/profile/components/SignUpForm';
 
 export default function SignUpPage() {

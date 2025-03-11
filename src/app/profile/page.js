@@ -1,5 +1,7 @@
 'use client';
 
+import './profile.css'
+
 import { useRouter } from 'next/navigation';
 import {GuestProfile} from "@/app/profile/components/GuestProfile";
 import {UserProfile} from "@/app/profile/components/UserProfile";
@@ -20,11 +22,11 @@ export default function Page() {
         <div className="container">
             <div className="profile-container">
                 <div className="card-profile">
-                        {user ? (
-                            <UserProfile profile={profile} handleSignOut={handleSignOut} />
-                        ) : (
-                            <GuestProfile />
-                        )}
+                    {user ? (
+                        <UserProfile profile={profile} handleSignOut={handleSignOut} />
+                    ) : (
+                        <GuestProfile />
+                    )}
                 </div>
             </div>
         </div>

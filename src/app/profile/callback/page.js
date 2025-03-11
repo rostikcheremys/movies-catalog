@@ -1,5 +1,7 @@
 'use client';
 
+import '@/app/profile/profile.css'
+
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 

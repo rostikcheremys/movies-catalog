@@ -1,9 +1,8 @@
 'use client';
 
-'use client';
+import '@/app/profile/profile.css'
 
 import SignInForm from '@/app/profile/components/SignInForm';
-
 
 export default function SignInPage() {
 

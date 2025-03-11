@@ -2,14 +2,13 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 
 import supabase from '@/app/profile/components/SupabaseClient';
 
 export const useSignIn = () => {
     const [error, setError] = useState(null);
-    const router = useRouter();
 
+    const router = useRouter();
 
     const handleSignIn = async (formData) => {
         setError(null);
@@ -36,7 +35,6 @@ export const useSignIn = () => {
             router.push('/profile/callback?success=true');
         }
     };
-
 
     return { handleSignIn, error };
 };
