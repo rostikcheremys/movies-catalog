@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 export default function Callback() {
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -32,25 +33,27 @@ export default function Callback() {
                     <div className="card-auth">
                         <div className="card-body-auth">
                             {isLoggedIn ? (
-                                <>
-                                    <h4>Successfully Logged In</h4>
-                                    <p>You have successfully logged in. You will be redirected to your profile shortly.</p>
-                                </>
+                                <div>
+                                    <h4>Sign In Successful</h4>
+                                    <p>Redirecting to your profile...</p>
+                                </div>
                             ) : (
-                                <>
+                                <div>
                                     <h4>Account Confirmation</h4>
                                     <p>
                                         A confirmation email has been sent to your email address.
                                         Please check your inbox and follow the instructions to verify your email.
                                     </p>
                                     <p>If you didn't receive the email, you can try again.</p>
-                                    <button className="btn-sign" onClick={() => setIsEmailSent(true)}>
+
+                                    <button className="btn-custom" onClick={() => setIsEmailSent(true)}>
                                         Resend
                                     </button>
+
                                     {isEmailSent && (
-                                        <p>An email has been sent. Please check your inbox!</p>
+                                        <p className="email-sent">An email has been sent. Please check your inbox!</p>
                                     )}
-                                </>
+                                </div>
                             )}
                         </div>
                     </div>

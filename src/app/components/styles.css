@@ -512,7 +512,7 @@
 }
 
 
-.btn-sign-profile {
+.btn-custom-white {
     background-color: #252627;
     border-radius: 10px;
     border: 1px solid white;
@@ -524,7 +524,7 @@
     margin-bottom: 16px;
 }
 
-.btn-sign-profile:hover {
+.btn-custom-white:hover {
     background-color: white;
     color: black;
     transition: 0.3s ease-in-out;
@@ -579,7 +579,7 @@
     padding-left: 10px;
 }
 
-.btn-sign {
+.btn-custom {
     background-color: #252627;
     border-radius: 10px;
     border: 1px solid #da202f;
@@ -590,12 +590,16 @@
     font-size: 16px;
 }
 
-.btn-sign:hover {
+.btn-custom:hover {
     background-color: #da202f;
     color: white;
     transition: 0.3s ease-in-out;
 }
 
+
+.link-sign {
+    margin: 16px 0 0 0;
+}
 
 .link-sign a{
     font-weight: bold;
@@ -607,6 +611,11 @@
     color: #da202f;
     transition: 0.3s ease-in-out;
 }
+
+.email-sent {
+    margin: 16px 0 0 0;
+}
+
 
 
 

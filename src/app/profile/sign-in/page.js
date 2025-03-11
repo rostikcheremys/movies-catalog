@@ -1,35 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { useRouter } from 'next/navigation';
+'use client';
 
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_KEY
-);
+import SignInForm from '@/app/profile/components/SignInForm';
 
-export default function Page() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
 
-    const [error, setError] = useState(null);
-
-    const router = useRouter();
-
-    const handleSignIn = async (e) => {
-        e.preventDefault();
-        setError(null);
-
-        const { error } = await supabase.auth.signInWithPassword({
-            email: formData.email,
-            password: formData.password
-        });
-
-        error ? setError(error.message) : router.push('/profile/callback?success=true');
-    };
+export default function SignInPage() {
 
     return (
         <div className="container">
@@ -38,20 +14,7 @@ export default function Page() {
                     <div className="card-auth">
                         <div className="card-body-auth">
                             <h4>Sign In</h4>
-                            {error && <p className="error-message">{error}</p>}
-                            <form>
-                                <div className="item-form">
-                                    <input type="email" placeholder="Email" className="form-control"
-                                           value={formData.email} onChange={(e) =>
-                                            setFormData({...formData, email: e.target.value})}/>
-                                </div>
-                                <div className="item-form">
-                                    <input type="password" placeholder="Password" className="form-control"
-                                           value={formData.password} onChange={(e) =>
-                                            setFormData({...formData, password: e.target.value})}/>
-                                </div>
-                                <button className="btn-sign" onClick={handleSignIn}>Sign In</button>
-                            </form>
+                            <SignInForm/>
                         </div>
                     </div>
                 </div>

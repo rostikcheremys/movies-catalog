@@ -1,13 +1,14 @@
 'use client';
 
-import {useRouter} from "next/navigation";
-import {useState, useEffect, useRef} from "react";
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
+
+import {useRouter} from "next/navigation";
+import {useState, useEffect, useRef} from "react";
 
 export default function Page() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,9 +33,14 @@ export default function Page() {
             });
     };
 
+    const previousMovieApi = useRef();
+
     useEffect(() => {
-        getCards(currentPage);
-    }, [currentPage]);
+        if (previousMovieApi.current !== movieApi) {
+            previousMovieApi.current = movieApi;
+            getCards(currentPage);
+        }
+    }, [movieApi]);
 
     const handleCardClick = (id) => {
         router.push(`/movie/${id}`);

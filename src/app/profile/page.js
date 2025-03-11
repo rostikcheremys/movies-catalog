@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+
 import { useEffect, useState } from "react";
 import { createClient } from '@supabase/supabase-js';
 
@@ -10,8 +11,8 @@ const supabase = createClient(
 );
 
 export default function Page() {
-    const [profile, setProfile] = useState(null);
     const [user, setUser] = useState(null);
+    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -41,9 +42,9 @@ export default function Page() {
                 <div className="profile-container">
                     <div className="card-profile">
                         <div className="card-body-profile">
-                            <h4>Welcome, {profile?.first_name || user.email}</h4>
+                            <h4>Welcome, {profile?.first_name}</h4>
                             <i className="bi bi-person-fill"></i>
-                            <button className="btn-sign" onClick={handleSignOut}>Sign Out</button>
+                            <button className="btn-custom" onClick={handleSignOut}>Sign Out</button>
                         </div>
                     </div>
                 </div>
@@ -53,11 +54,13 @@ export default function Page() {
                         <div className="card-body-profile">
                             <h4>Hello, welcome!</h4>
                             <i className="bi bi-person-fill"></i>
+
                             <Link href="/profile/sign-in">
-                                <button type="button" className="btn-sign-profile">Sign In</button>
+                                <button type="button" className="btn-custom-white">Sign In</button>
                             </Link>
+
                             <Link href="/profile/sign-up">
-                                <button type="button" className="btn-sign">Sign Up</button>
+                                <button type="button" className="btn-custom">Sign Up</button>
                             </Link>
                         </div>
                     </div>
