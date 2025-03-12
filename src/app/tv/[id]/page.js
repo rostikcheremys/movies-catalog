@@ -10,6 +10,7 @@ import Overview from "@/app/movie/components/Overview";
 import Trailer from"@/app/movie/components/Trailer";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import Favorites from "@/app/movie/components/Favorites";
 
 export default function Page() {
     const { id } = useParams();
@@ -52,9 +53,11 @@ export default function Page() {
                 <div className="card-container">
                     <div className="image-container">
                         <ImageCard item={tv} customClass="img-item" scrollToTrailer={scrollToTrailer}/>
+                        <Favorites item={tv} />
                     </div>
 
                     <VoteAverage item={tv}/>
+                    <Favorites item={tv} />
                     <InfoList item={tv}/>
                 </div>
             </div>
