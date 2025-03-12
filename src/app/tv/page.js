@@ -8,6 +8,7 @@ import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
+import Favorites from "@/app/movie/components/Favorites";
 
 export default function Page() {
 
@@ -50,12 +51,13 @@ export default function Page() {
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
-                {cardsList.map((item) => (
-                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id)}>
+                {cardsList.map((tv) => (
+                    <div key={tv.id} className="col" onClick={() => handleCardClick(tv.id)}>
                         <div className="card">
-                            <ImageCard item={item} customClass="img-card" scrollToTrailer={null}/>
-                            <VoteAverage item={item}/>
-                            <Title item={item}/>
+                            <ImageCard item={tv} customClass="img-card" scrollToTrailer={null} />
+                            <VoteAverage item={tv} />
+                            <Favorites item={tv} />
+                            <Title item={tv} />
                         </div>
                     </div>
                 ))}

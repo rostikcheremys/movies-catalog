@@ -7,6 +7,7 @@ import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
+import Favorites from "@/app/movie/components/Favorites";
 
 export default function Page() {
     return (
@@ -75,12 +76,13 @@ function SearchPage() {
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
-                {cardsList.map((item) => (
-                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id, item.media_type)}>
+                {cardsList.map((search) => (
+                    <div key={search.id} className="col" onClick={() => handleCardClick(search.id, search.media_type)}>
                         <div className="card">
-                            <ImageCard item={item} customClass="img-card" scrollToTrailer={null} />
-                            <VoteAverage item={item} />
-                            <Title item={item} />
+                            <ImageCard item={search} customClass="img-card" scrollToTrailer={null} />
+                            <VoteAverage item={search} />
+                            <Favorites item={search} />
+                            <Title item={search} />
                         </div>
                     </div>
                 ))}

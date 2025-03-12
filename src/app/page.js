@@ -9,6 +9,7 @@ import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 
 import {useRouter} from "next/navigation";
 import {useState, useEffect, useRef} from "react";
+import Favorites from "@/app/movie/components/Favorites";
 
 export default function Page() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -51,18 +52,20 @@ export default function Page() {
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
-                {cardsList.map((item) => (
-                    <div key={item.id} className="col" onClick={() => handleCardClick(item.id)}>
+                {cardsList.map((movie) => (
+                    <div key={movie.id} className="col" onClick={() => handleCardClick(movie.id)}>
                         <div className="card">
-                            <ImageCard item={item} customClass="img-card" scrollToTrailer={null}/>
-                            <VoteAverage item={item}/>
-                            <Title item={item}/>
+                            <ImageCard item={movie} customClass="img-card" scrollToTrailer={null} />
+                            <VoteAverage item={movie} />
+                            <Favorites item={movie} />
+                            <Title item={movie} />
                         </div>
                     </div>
                 ))}
             </div>
 
-            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} fetch={getCards}/>
+            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
+                        fetch={getCards}/>
         </div>
     );
 }

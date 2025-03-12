@@ -12,6 +12,7 @@ export const useUser = () => {
         const fetchUser = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
+
             if (user) {
                 const { data: profileData } = await supabase
                     .from('profiles')

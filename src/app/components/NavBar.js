@@ -51,7 +51,7 @@ export default function NavBar() {
 
                     <ul className="navbar-action">
                         <li className="action-icon favorites-item">
-                            <Link className={`nav-link ${pathname === "/" ? "active" : ""}`} href="/">
+                            <Link className={`nav-link ${pathname === "/favorite" ? "active" : ""}`} href="/favorite">
                                 <i className="bi bi-bookmark-fill"></i><span>Favorites</span></Link>
 
                         </li>
