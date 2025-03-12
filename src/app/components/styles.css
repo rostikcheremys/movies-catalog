@@ -22,8 +22,12 @@
 .image-container {
     flex-shrink: 0;
     cursor: pointer;
-    position: relative;
+
 }
+
+/*.image-container {
+    position: relative;
+}*/
 
 .img-item {
     width: 100%;
