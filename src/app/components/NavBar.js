@@ -50,13 +50,14 @@ export default function NavBar() {
                     </form>
 
                     <ul className="navbar-action">
-                        <li className="action-icon mark-favorites-item">
+                        <li className="action-icon favorites-item">
                             <Link className={`nav-link ${pathname === "/" ? "active" : ""}`} href="/">
-                                <i className="bi bi-bookmark-fill"></i></Link>
+                                <i className="bi bi-bookmark-fill"></i><span>Favorites</span></Link>
+
                         </li>
                         <li className="action-icon user-item">
                             <Link className={`nav-link ${pathname === "/profile" ? "active" : ""}`} href="/profile">
-                                <i className="bi bi-person-fill"></i></Link>
+                                <i className="bi bi-person-fill"></i><span>Profile</span></Link>
                         </li>
                     </ul>
                 </div>

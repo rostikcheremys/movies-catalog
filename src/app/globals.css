@@ -56,7 +56,7 @@ html, body {
 }
 
 .nav-link.active {
-    color: #da202f;
+    color: white;
     font-weight: bold;
 }
 
@@ -69,22 +69,38 @@ html, body {
     min-width: 250px;
 }
 
-@media (max-width: 992px) {
-    .search-item{
+@media (max-width: 991px) {
+    .search-item {
         margin-inline-end: 12px;
         margin-inline-start: 12px;
         width: auto;
+    }
+
+    .navbar-action {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .action-icon {
+        font-size: 1.5rem;
+    }
+
+    .navbar-action .action-icon .nav-link span {
+        display: inline-flex;
     }
 }
 
 .navbar-action {
     display: flex;
     list-style: none;
-    color: white;
-    font-size: 30px;
+    font-size: 2rem;
     padding: 0;
     margin: auto 0 auto auto;
-    justify-content: end;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.navbar-action .action-icon span {
+    display: none;
 }
 
 .action-icon {
