@@ -10,7 +10,7 @@ import Title from "@/app/movie/components/Title";
 import Favorites from "@/app/movie/components/Favorites";
 
 import { useUser } from "@/app/profile/components/useUser";
-import { getUserFavorites } from "@/app/favorites/components/favorites";
+import { getUserFavorites } from "@/app/favorites/components/getUserFavorites";
 
 export default function FavoritePage() {
     const [loading, setLoading] = useState(true);
