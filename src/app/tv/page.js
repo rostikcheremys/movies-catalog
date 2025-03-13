@@ -2,7 +2,6 @@
 
 import {useRouter} from "next/navigation";
 import {useState, useEffect, useRef} from "react";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";

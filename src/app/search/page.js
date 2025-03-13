@@ -2,12 +2,15 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, Suspense } from "react";
+
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import Favorites from "@/app/movie/components/Favorites";
+import {useUser} from "@/app/profile/components/useUser";
+import {getUserFavorites} from "@/app/favorites/components/getUserFavorites";
 
 export default function Page() {
     return (
@@ -18,15 +21,17 @@ export default function Page() {
 }
 
 function SearchPage() {
-    const searchParams = useSearchParams();
-    const query = searchParams.get("query") || "";
-
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const previousSearchApi = useRef();
+    const [favorites, setFavorites] = useState([]);
+
+    const { user } = useUser();
     const router = useRouter();
+    const previousSearchApi = useRef();
+    const searchParams = useSearchParams();
+    const query = searchParams.get("query") || "";
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const searchApi = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&include_adult=false&language=en-US&query=${query}`;
@@ -52,6 +57,11 @@ function SearchPage() {
             });
     };
 
+    const handleCardClick = (id, mediaType) => {
+        const validMediaTypes = ["movie", "tv"];
+        validMediaTypes.includes(mediaType) ? router.push(`/${mediaType}/${id}`) : router.push("/not-found");
+    };
+
     useEffect(() => {
         if (query.trim() !== "") {
             if (previousSearchApi.current !== searchApi) {
@@ -62,14 +72,11 @@ function SearchPage() {
         }
     }, [searchApi, query]);
 
-    const handleCardClick = (id, mediaType) => {
-        const validMediaTypes = ["movie", "tv"];
-        if (validMediaTypes.includes(mediaType)) {
-            router.push(`/${mediaType}/${id}`);
-        } else {
-            router.push("/not-found");
+    useEffect(() => {
+        if (user) {
+            getUserFavorites(user.id).then(setFavorites);
         }
-    };
+    }, [user]);
 
     if (loading) return <LoadingSpinner />;
 
@@ -77,18 +84,25 @@ function SearchPage() {
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
                 {cardsList.map((search) => (
-                    <div key={search.id} className="col" onClick={() => handleCardClick(search.id, search.media_type)}>
+                    <div key={search.id} className="col" onClick={() =>
+                        handleCardClick(search.id, search.media_type)}>
                         <div className="card">
                             <ImageCard item={search} customClass="img-card" scrollToTrailer={null} />
                             <VoteAverage item={search} />
-                            <Favorites item={search} itemType={search.media_type}/>
+
+                            {user && (
+                                <Favorites item={search} itemType={search.media_type} details={search} userId={user.id}
+                                           favorites={favorites} setFavorites={setFavorites}/>
+                            )}
+
                             <Title item={search} />
                         </div>
                     </div>
                 ))}
             </div>
 
-            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} fetch={getCards} />
+            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
+                        fetch={getCards} />
         </div>
     );
 }
