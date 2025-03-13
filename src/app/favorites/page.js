@@ -1,58 +1,47 @@
 'use client';
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getUserFavorites } from "@/app/favorites/components/favorites";
+
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import Favorites from "@/app/movie/components/Favorites";
-import { useRouter } from "next/navigation";
+
 import { useUser } from "@/app/profile/components/useUser";
+import { getUserFavorites } from "@/app/favorites/components/favorites";
 
 export default function FavoritePage() {
     const [loading, setLoading] = useState(true);
     const [favorites, setFavorites] = useState([]);
+
     const { user } = useUser();
     const router = useRouter();
 
-
     useEffect(() => {
-        if (!user) return;
-
-        const fetchFavorites = async () => {
+        if (user) {
             setLoading(true);
-            const fetchedFavorites = await getUserFavorites(user.id);
-            setFavorites(fetchedFavorites);
-            setLoading(false);
-        };
-
-        fetchFavorites();
+            getUserFavorites(user.id)
+                .then(setFavorites)
+                .finally(() => setLoading(false));
+        }
     }, [user]);
 
-    const handleCardClick = (id, mediaType) => {
-        router.push(["movie", "tv"].includes(mediaType) ? `/${mediaType}/${id}` : "/not-found");
-    };
-
-    if (!user) return <LoadingSpinner />;
     if (loading) return <LoadingSpinner />;
 
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
                 {favorites.map((item) => (
-                    <div key={item.item_id} className="col" onClick={() => handleCardClick(item.item_id, item.item_type)}>
+                    <div key={item.item_id} className="col" onClick={() =>
+                        router.push(`/${item.item_type}/${item.item_id}`)}>
+
                         <div className="card">
                             <ImageCard item={{ poster_path: item.image, title: item.title }} customClass="img-card" />
                             <VoteAverage item={{ vote_average: item.vote_average }} />
-                            <Favorites
-                                item={item}
-                                itemType={item.item_type}
-                                details={item.details}
-                                userId={user.id}
-                                favorites={favorites}
-                                setFavorites={setFavorites}
-                            />
+                            <Favorites item={{ ...item, id: item.item_id }} itemType={item.item_type} details={item}
+                                       userId={user.id} favorites={favorites} setFavorites={setFavorites}/>
                             <Title item={{ title: item.title, release_date: item.data }} />
                         </div>
                     </div>
