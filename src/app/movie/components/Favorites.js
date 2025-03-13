@@ -11,14 +11,14 @@ export default function Favorites({ item, itemType, details, userId, favorites, 
     const handleToggleFavorite = async (e) => {
         e.stopPropagation();
 
-        const { poster_path, title, release_date, vote_average } = details;
+        const { poster_path, title, name, release_date, first_air_date, vote_average } = details;
 
         if (isFavorite) {
             await removeFromFavorites(userId, item.id, itemType);
             setFavorites(prev => prev.filter(fav => !(fav.item_id === item.id && fav.item_type === itemType)));
             setIsFavorite(false);
         } else {
-            await addToFavorites(userId, item.id, itemType, poster_path, title, release_date, vote_average);
+            await addToFavorites(userId, item.id, itemType, poster_path, title, name, release_date, first_air_date, vote_average);
             setFavorites(prev => [...prev, { item_id: item.id, item_type: itemType }]);
             setIsFavorite(true);
         }

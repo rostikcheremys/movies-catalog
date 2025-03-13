@@ -36,6 +36,7 @@
 }
 
 .img-item:hover {
+    border-radius: 10px;
     background-color: white;
     opacity: 50%;
 }

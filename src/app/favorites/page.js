@@ -30,6 +30,7 @@ export default function FavoritePage() {
 
     if (loading) return <LoadingSpinner />;
 
+
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
@@ -38,11 +39,13 @@ export default function FavoritePage() {
                         router.push(`/${item.item_type}/${item.item_id}`)}>
 
                         <div className="card">
-                            <ImageCard item={{ poster_path: item.image, title: item.title }} customClass="img-card" />
+                            <ImageCard item={{ poster_path: item.image, title: item.title, name: item.tv_name }}
+                                       customClass="img-card" />
                             <VoteAverage item={{ vote_average: item.vote_average }} />
                             <Favorites item={{ ...item, id: item.item_id }} itemType={item.item_type} details={item}
                                        userId={user.id} favorites={favorites} setFavorites={setFavorites}/>
-                            <Title item={{ title: item.title, release_date: item.data }} />
+                            <Title item={{ title: item.title, name: item.tv_name, release_date: item.data,
+                                first_air_date: item.tv_date }} />
                         </div>
                     </div>
                 ))}

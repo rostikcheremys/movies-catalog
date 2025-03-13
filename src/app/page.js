@@ -14,7 +14,7 @@ import Favorites from "@/app/movie/components/Favorites";
 import { useUser } from "@/app/profile/components/useUser";
 import { getUserFavorites } from "@/app/favorites/components/getUserFavorites";
 
-export default function Page() {
+export default function MoviesPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);

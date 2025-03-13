@@ -2,7 +2,7 @@
 
 import supabase from '@/app/profile/components/SupabaseClient';
 
-export async function addToFavorites(userId, itemId, itemType, image, title, data, voteAverage) {
+export async function addToFavorites(userId, itemId, itemType, image, title, tvName, data, tvDate, voteAverage){
     const { data: result, error } = await supabase
         .from('favorites')
         .insert([{
@@ -12,6 +12,8 @@ export async function addToFavorites(userId, itemId, itemType, image, title, dat
             image: image,
             title: title,
             data: data,
+            tv_name: tvName,
+            tv_date: tvDate,
             vote_average: voteAverage
         }]);
 
