@@ -54,6 +54,7 @@ html, body {
 
 .nav-link:hover {
     color: #da202f;
+    transition: 0.3s ease-in-out;
 }
 
 .nav-link.active {
