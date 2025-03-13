@@ -1,26 +1,23 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useUser } from "@/app/profile/components/useUser";
-import { addToFavorites, getUserFavorites, removeFromFavorites } from "@/app/favorites/components/favorites";
+import { useState, useEffect } from 'react';
+import { addToFavorites, removeFromFavorites } from "@/app/favorites/components/favorites";
 
-export default function Favorites({ item, itemType, details }) {
-    const { user } = useUser();
+export default function Favorites({ item, itemType, details, userId, favorites, setFavorites }) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
-        if (user && item && itemType) {
-            getUserFavorites(user.id).then(favorites => {
-                setIsFavorite(favorites.some(fav => fav.item_id === item.id && fav.item_type === itemType));
-            });
+        if (userId && item && itemType) {
+            setIsFavorite(favorites.some(fav => fav.item_id === item.id && fav.item_type === itemType));
         }
-    }, [user, item, itemType]);
+    }, [userId, item, itemType, favorites]);
 
+    console.log(`User data:", ${userId}`);
 
     const handleToggleFavorite = async (e) => {
         e.stopPropagation();
 
-        if (!user) {
+        if (!userId) {
             alert("Будь ласка, увійдіть у профіль!");
             return;
         }
@@ -28,22 +25,14 @@ export default function Favorites({ item, itemType, details }) {
         const { poster_path, title, release_date, vote_average } = details;
 
         if (isFavorite) {
-            await removeFromFavorites(user.id, item.id, itemType, poster_path, title, release_date, vote_average);
-            setIsFavorite(false);
+            await removeFromFavorites(userId, item.id, itemType, poster_path, title, release_date, vote_average);
+            setFavorites(prev => prev.filter(fav => !(fav.item_id === item.id && fav.item_type === itemType)));
         } else {
-            await addToFavorites(user.id, item.id, itemType, poster_path, title, release_date, vote_average);
-
-            console.log("Adding to favorites:");
-            console.log("User ID:", user.id);
-            console.log("Item ID:", item.id);
-            console.log("Item Type:", itemType);
-            console.log("Image:", poster_path);
-            console.log("Title:", title);
-            console.log("Date:", release_date);
-            console.log("Vote Average:", vote_average);
-
-            setIsFavorite(true);
+            await addToFavorites(userId, item.id, itemType, poster_path, title, release_date, vote_average);
+            setFavorites(prev => [...prev, { item_id: item.id, item_type: itemType }]);
         }
+
+        setIsFavorite(!isFavorite);
     };
 
     return (

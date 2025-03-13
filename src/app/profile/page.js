@@ -1,13 +1,12 @@
 'use client';
 
-import './profile.css'
-
+import './profile.css';
 import { useRouter } from 'next/navigation';
-import {GuestProfile} from "@/app/profile/components/GuestProfile";
-import {UserProfile} from "@/app/profile/components/UserProfile";
-import {useUser} from "@/app/profile/components/useUser";
-
+import { GuestProfile } from "@/app/profile/components/GuestProfile";
+import { UserProfile } from "@/app/profile/components/UserProfile";
+import { useUser } from "@/app/profile/components/useUser";
 import supabase from '@/app/profile/components/SupabaseClient';
+import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 
 export default function Page() {
     const { user, profile } = useUser();
@@ -17,6 +16,8 @@ export default function Page() {
         await supabase.auth.signOut();
         router.push('/');
     };
+
+    if (user === undefined) return <LoadingSpinner />;
 
     return (
         <div className="container">

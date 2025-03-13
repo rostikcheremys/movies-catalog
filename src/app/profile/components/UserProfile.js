@@ -4,9 +4,6 @@ import {useEffect, useState} from "react";
 
 export const UserProfile = ({ profile, handleSignOut }) => {
 
-
-    console.log("User's name:", profile?.first_name);
-
     return (
         <div className="card-body-profile">
             <h4>Welcome, {profile?.first_name}</h4>
