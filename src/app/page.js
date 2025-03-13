@@ -1,14 +1,14 @@
 'use client';
 
+import {useRouter} from "next/navigation";
+import {useState, useEffect, useRef} from "react";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
 import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
-
-import {useRouter} from "next/navigation";
-import {useState, useEffect, useRef} from "react";
 import Favorites from "@/app/movie/components/Favorites";
 
 import { useUser } from "@/app/profile/components/useUser";
@@ -19,10 +19,13 @@ export default function Page() {
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [favorites, setFavorites] = useState([]);
+
+    const { user } = useUser();
     const router = useRouter();
+    const previousMovieApi = useRef();
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-
     const movieApi = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`;
 
     const getCards = (page = 1) => {
@@ -37,7 +40,9 @@ export default function Page() {
             });
     };
 
-    const previousMovieApi = useRef();
+    const handleCardClick = (id) => {
+        router.push(`/movie/${id}`);
+    };
 
     useEffect(() => {
         if (previousMovieApi.current !== movieApi) {
@@ -46,19 +51,11 @@ export default function Page() {
         }
     }, [movieApi]);
 
-    const { user } = useUser();  // Отримуємо юзера
-    const [favorites, setFavorites] = useState([]);
-
     useEffect(() => {
         if (user) {
             getUserFavorites(user.id).then(setFavorites);
         }
     }, [user]);
-
-
-    const handleCardClick = (id) => {
-        router.push(`/movie/${id}`);
-    };
 
     if (loading) return <LoadingSpinner />;
 
@@ -70,6 +67,7 @@ export default function Page() {
                         <div className="card">
                             <ImageCard item={movie} customClass="img-card" scrollToTrailer={null} />
                             <VoteAverage item={movie} />
+
                             {user && (
                                 <Favorites item={movie} itemType="movie" details={movie} userId={user.id}
                                            favorites={favorites} setFavorites={setFavorites}/>
