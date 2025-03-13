@@ -45,8 +45,8 @@ export default function NavBar() {
                     </ul>
 
                     <form className="search-item" role="search">
-                        <input className="form-control " type="search" placeholder="Search.." aria-label="Search" value={query}
-                               onChange={handleInputChange}/>
+                        <input className="form-control " type="search" placeholder="Search.." aria-label="Search"
+                               value={query} onChange={handleInputChange}/>
                     </form>
 
                     <ul className="navbar-action">
