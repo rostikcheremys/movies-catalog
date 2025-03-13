@@ -1,6 +1,10 @@
 'use client';
 
+import {useEffect, useState} from "react";
+
 export const UserProfile = ({ profile, handleSignOut }) => {
+
+
     console.log("User's name:", profile?.first_name);
 
     return (

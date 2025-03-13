@@ -56,7 +56,7 @@ export default function Page() {
                         <div className="card">
                             <ImageCard item={tv} customClass="img-card" scrollToTrailer={null} />
                             <VoteAverage item={tv} />
-                            <Favorites item={tv} />
+                            <Favorites item={tv} itemType="tv"/>
                             <Title item={tv} />
                         </div>
                     </div>

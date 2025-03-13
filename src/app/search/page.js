@@ -81,7 +81,7 @@ function SearchPage() {
                         <div className="card">
                             <ImageCard item={search} customClass="img-card" scrollToTrailer={null} />
                             <VoteAverage item={search} />
-                            <Favorites item={search} />
+                            <Favorites item={search} itemType={search.media_type}/>
                             <Title item={search} />
                         </div>
                     </div>
