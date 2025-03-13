@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { addToFavorites } from "@/app/favorites/components/addToFavorites";
 import { removeFromFavorites } from "@/app/favorites/components/removeFromFavorites";
 
-export default function Favorites({ item, itemType, details, userId, favorites, setFavorites }) {
+export default function Favorites({ item, itemType, details, userId, favorites, setFavorites, setCurrentPage }) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const handleToggleFavorite = async (e) => {
@@ -17,9 +17,22 @@ export default function Favorites({ item, itemType, details, userId, favorites, 
             await removeFromFavorites(userId, item.id, itemType);
             setFavorites(prev => prev.filter(fav => !(fav.item_id === item.id && fav.item_type === itemType)));
             setIsFavorite(false);
+
+            const remainingItems = favorites.filter(fav => fav.item_id !== item.id && fav.item_type === itemType);
+            if (remainingItems.length === 0) setCurrentPage(1);
+
         } else {
             await addToFavorites(userId, item.id, itemType, poster_path, title, name, release_date, first_air_date, vote_average);
-            setFavorites(prev => [...prev, { item_id: item.id, item_type: itemType }]);
+
+            setFavorites(prev => {
+                const updatedFavorites = [...prev, { item_id: item.id, item_type: itemType }];
+                const totalPages = Math.ceil(updatedFavorites.length / 20);
+                const currentItemsInPage = (totalPages - 1) * 20;
+
+                if (updatedFavorites.length > currentItemsInPage + 20) setCurrentPage(totalPages);
+                return updatedFavorites;
+            });
+
             setIsFavorite(true);
         }
     };
