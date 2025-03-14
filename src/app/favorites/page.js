@@ -21,7 +21,7 @@ export default function FavoritePage() {
     const [totalPages, setTotalPages] = useState(0);
     const itemsPerPage = 20;
 
-    const { user } = useUser();
+    const { user, loading: userLoading } = useUser();
     const router = useRouter();
 
     useEffect(() => {
@@ -52,7 +52,13 @@ export default function FavoritePage() {
         }
     }, [favorites, currentPage]);
 
-    if (loading) return <LoadingSpinner />;
+    useEffect(() => {
+        if (!user && !userLoading) {
+            router.push("/profile");
+        }
+    }, [user, userLoading, router]);
+
+    if (loading || userLoading) return <LoadingSpinner />;
 
     return (
         <div>
