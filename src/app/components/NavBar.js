@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link";
-
 import {useEffect, useState} from "react";
 import {usePathname, useRouter} from "next/navigation";
 
@@ -10,19 +9,31 @@ export default function NavBar() {
     const router = useRouter();
     const pathname = usePathname();
 
+    const handleInputChange = (e) => { setQuery(e.target.value) };
+
     useEffect(() => {
         import('bootstrap/dist/js/bootstrap.bundle.min.js');
     }, []);
 
     useEffect(() => {
-        if (query.trim() !== "") {
-            router.push(`/search?query=${query}`);
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryParam = urlParams.get('query');
+        if (queryParam) {
+            setQuery(queryParam);
+        } else {
+            setQuery("");
         }
+    }, [pathname]);
+
+    useEffect(() => {
+        if (query.trim() !== "") router.push(`/search?query=${query}`);
     }, [query, router]);
 
-    const handleInputChange = (e) => {
-        setQuery(e.target.value);
-    };
+    useEffect(() => {
+        if (pathname.includes("/search") && query === "") router.push("/");
+
+        if (!pathname.includes("/search")) setQuery("");
+    }, [pathname, query, router]);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
