@@ -40,7 +40,7 @@ export default function NavBar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
             <div className="container-fluid">
-                <Link className="name-item" href="/public"><i className="bi bi-film"></i> MovieNest</Link>
+                <Link className="name-item" href="/"><i className="bi bi-film"></i> MovieNest</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -49,7 +49,7 @@ export default function NavBar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link className={`nav-link ${pathname === "/" ? "active" : ""}`} href="/public">Movies</Link>
+                            <Link className={`nav-link ${pathname === "/" ? "active" : ""}`} href="/">Movies</Link>
                         </li>
                         <li className="nav-item">
                             <Link className={`nav-link ${pathname === "/tv" ? "active" : ""}`} href="/tv">TV
