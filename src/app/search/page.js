@@ -38,6 +38,14 @@ function SearchPage() {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const searchApi = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&include_adult=false&language=en-US&query=${query}`;
 
+    const handleCardClick = (id, mediaType) => {
+        if (mediaType === "movie" || mediaType === "tv") {
+            router.push(`/${mediaType}/${id}`);
+        } else {
+            router.push("/not-found");
+        }
+    }
+
     const getCards = (page = 1) => {
         setLoading(true);
         fetch(`${searchApi}&page=${page}`)
@@ -66,8 +74,8 @@ function SearchPage() {
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
                 {cardsList.map((search) => (
-                    <div key={search.id} className="col" onClick={() =>
-                        router.push(`/${search.media_type}/${search.id}`)
+                    <div key={search.id} className="col" onClick={() => {
+                        handleCardClick(search.id, search.media_type)}
                     }>
                         <div className="card">
                             <ImageCard item={search} customClass="img-card" scrollToTrailer={null} />
