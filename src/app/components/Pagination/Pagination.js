@@ -1,5 +1,7 @@
 'use client'
 
+import "@/app/components/Pagination/styles.css"
+
 export default function Pagination({totalPages, currentPage, setCurrentPage, fetch}) {
     const generatePageNumbers = () => {
         let pages = [];

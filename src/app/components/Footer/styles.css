@@ -1,0 +1,27 @@
+.footer-container {
+    height: 100px;
+    color: white;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    background-color: #252627;
+    padding: 20px 0;
+}
+
+.github {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding-bottom: 7px;
+}
+
+.github:hover {
+    color: #da202f;
+    transition: 0.3s ease-in-out;
+}
+
+.footer-container .developer {
+    margin: 0;
+    font-size: 12px;
+    padding-top: 7px;
+}

@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 
-import Pagination from "@/app/components/Pagination";
+import Pagination from "@/app/components/Pagination/Pagination";
 import ImageCard from "@/app/components/ImageCard";
 import VoteAverage from "@/app/components/VoteAverage";
 import Title from "@/app/components/Title";

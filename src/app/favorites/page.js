@@ -8,7 +8,7 @@ import ImageCard from "@/app/components/ImageCard";
 import VoteAverage from "@/app/components/VoteAverage";
 import Title from "@/app/components/Title";
 import Favorites from "@/app/components/Favorites";
-import Pagination from "@/app/components/Pagination";
+import Pagination from "@/app/components/Pagination/Pagination";
 
 import { useUser } from "@/app/hooks/useUser";
 import { getUserFavorites } from "@/app/favorites/utils/getUserFavorites";
