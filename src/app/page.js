@@ -1,7 +1,7 @@
 'use client';
 
-import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
@@ -14,25 +14,27 @@ import { useUser } from "@/app/profile/components/useUser";
 import { useFavorites } from "@/app/favorites/components/useFavorites";
 
 export default function MoviesPage() {
-    const [currentPage, setCurrentPage] = useState(1);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const initialPage = Number(searchParams.get("page")) || 1;
+
+    const [currentPage, setCurrentPage] = useState(initialPage);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const { user } = useUser();
-    const router = useRouter();
-    const previousMovieApi = useRef();
     const { favorites, setFavorites } = useFavorites(user);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const movieApi = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}`;
 
-    const getCards = (page = 1) => {
+    const getCards = (page) => {
         setLoading(true);
         fetch(`${movieApi}&page=${page}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json);
+                console.log(json)
                 setCardsList(json.results || []);
                 setTotalPages(json.total_pages || 1);
                 setLoading(false);
@@ -40,11 +42,15 @@ export default function MoviesPage() {
     };
 
     useEffect(() => {
-        if (previousMovieApi.current !== movieApi) {
-            previousMovieApi.current = movieApi;
-            getCards(currentPage);
+        getCards(currentPage);
+    }, [currentPage]);
+
+    useEffect(() => {
+        const newPage = Number(searchParams.get("page")) || 1;
+        if (newPage !== currentPage) {
+            setCurrentPage(newPage);
         }
-    }, [movieApi]);
+    }, [searchParams]);
 
     if (loading) return <LoadingSpinner />;
 
@@ -69,7 +75,9 @@ export default function MoviesPage() {
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
-                        fetch={getCards}/>
+                        fetch={(page) => {setCurrentPage(page); router.push(`?page=${page}`,
+                            { scroll: true });
+                        }}/>
         </div>
     );
 }

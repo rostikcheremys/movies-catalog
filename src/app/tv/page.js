@@ -1,7 +1,7 @@
 'use client';
 
-import { useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import {useRouter, useSearchParams} from "next/navigation";
 
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
@@ -14,14 +14,16 @@ import { useUser } from "@/app/profile/components/useUser";
 import { useFavorites } from "@/app/favorites/components/useFavorites";
 
 export default function TVPage() {
-    const [currentPage, setCurrentPage] = useState(1);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const initialPage = Number(searchParams.get("page")) || 1;
+
+    const [currentPage, setCurrentPage] = useState(initialPage);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const { user } = useUser();
-    const router = useRouter();
-    const previousTVApi = useRef();
     const { favorites, setFavorites } = useFavorites(user);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -40,11 +42,15 @@ export default function TVPage() {
     };
 
     useEffect(() => {
-        if (previousTVApi.current !== tvApi ) {
-            previousTVApi.current = tvApi;
-            getCards(currentPage);
+        getCards(currentPage);
+    }, [currentPage]);
+
+    useEffect(() => {
+        const newPage = Number(searchParams.get("page")) || 1;
+        if (newPage !== currentPage) {
+            setCurrentPage(newPage);
         }
-    }, [tvApi]);
+    }, [searchParams]);
 
     if (loading) return <LoadingSpinner />;
 
@@ -69,7 +75,9 @@ export default function TVPage() {
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
-                        fetch={getCards}/>
+                        fetch={(page) => {setCurrentPage(page); router.push(`?page=${page}`,
+                            { scroll: true });
+                        }}/>
         </div>
     );
 }

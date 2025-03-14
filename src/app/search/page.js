@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
@@ -22,16 +22,17 @@ export default function Page() {
 }
 
 function SearchPage() {
-    const [currentPage, setCurrentPage] = useState(1);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const query = searchParams.get("query") || "";
+    const initialPage = Number(searchParams.get("page")) || 1;
+
+    const [currentPage, setCurrentPage] = useState(initialPage);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const { user } = useUser();
-    const router = useRouter();
-    const previousSearchApi = useRef();
-    const searchParams = useSearchParams();
-    const query = searchParams.get("query") || "";
     const { favorites, setFavorites } = useFavorites(user);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
@@ -40,14 +41,8 @@ function SearchPage() {
     const getCards = (page = 1) => {
         setLoading(true);
         fetch(`${searchApi}&page=${page}`)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return res.json();
-            })
+            .then((res) => res.json())
             .then((json) => {
-                console.log(json);
                 setCardsList(json.results || []);
                 setTotalPages(json.total_pages || 1);
                 setLoading(false);
@@ -58,20 +53,12 @@ function SearchPage() {
             });
     };
 
-    const handleCardClick = (id, mediaType) => {
-        const validMediaTypes = ["movie", "tv"];
-        validMediaTypes.includes(mediaType) ? router.push(`/${mediaType}/${id}`) : router.push("/not-found");
-    };
-
     useEffect(() => {
         if (query.trim() !== "") {
-            if (previousSearchApi.current !== searchApi) {
-                previousSearchApi.current = searchApi;
-                setCurrentPage(1);
-                getCards(1);
-            }
+            getCards(initialPage);
+            setCurrentPage(initialPage);
         }
-    }, [searchApi, query]);
+    }, [query, initialPage]);
 
     if (loading) return <LoadingSpinner />;
 
@@ -80,7 +67,8 @@ function SearchPage() {
             <div className="row row-cols-1 row-cols-md-4 g-4">
                 {cardsList.map((search) => (
                     <div key={search.id} className="col" onClick={() =>
-                        handleCardClick(search.id, search.media_type)}>
+                        router.push(`/${search.media_type}/${search.id}`)
+                    }>
                         <div className="card">
                             <ImageCard item={search} customClass="img-card" scrollToTrailer={null} />
                             <VoteAverage item={search} />
@@ -97,7 +85,9 @@ function SearchPage() {
             </div>
 
             <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
-                        fetch={getCards} />
+                        fetch={(page) => {setCurrentPage(page); router.push(`?query=${query}&page=${page}`,
+                            { scroll: true });
+                        }}/>
         </div>
     );
 }
