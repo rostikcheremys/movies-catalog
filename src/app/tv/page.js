@@ -1,7 +1,7 @@
 'use client';
 
-import {useRouter} from "next/navigation";
-import {useState, useEffect, useRef} from "react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
 
 import Pagination from "@/app/components/Pagination";
 import ImageCard from "@/app/movie/components/ImageCard";
@@ -11,18 +11,18 @@ import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import Favorites from "@/app/movie/components/Favorites";
 
 import { useUser } from "@/app/profile/components/useUser";
-import { getUserFavorites } from "@/app/favorites/components/getUserFavorites";
+import { useFavorites } from "@/app/favorites/components/useFavorites";
 
 export default function TVPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [favorites, setFavorites] = useState([]);
 
     const { user } = useUser();
     const router = useRouter();
     const previousTVApi = useRef();
+    const { favorites, setFavorites } = useFavorites(user);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const tvApi = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}`;
@@ -39,10 +39,6 @@ export default function TVPage() {
             });
     };
 
-    const handleCardClick = (id) => {
-        router.push(`/tv/${id}`);
-    };
-
     useEffect(() => {
         if (previousTVApi.current !== tvApi ) {
             previousTVApi.current = tvApi;
@@ -50,19 +46,13 @@ export default function TVPage() {
         }
     }, [tvApi]);
 
-    useEffect(() => {
-        if (user) {
-            getUserFavorites(user.id).then(setFavorites);
-        }
-    }, [user]);
-
     if (loading) return <LoadingSpinner />;
 
     return (
         <div>
             <div className="row row-cols-1 row-cols-md-4 g-4">
                 {cardsList.map((tv) => (
-                    <div key={tv.id} className="col" onClick={() => handleCardClick(tv.id)}>
+                    <div key={tv.id} className="col" onClick={() => router.push(`/tv/${tv.id}`)}>
                         <div className="card">
                             <ImageCard item={tv} customClass="img-card" scrollToTrailer={null} />
                             <VoteAverage item={tv} />

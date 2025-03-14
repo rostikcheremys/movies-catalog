@@ -1,24 +1,31 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import ImageCard from "@/app/movie/components/ImageCard";
 import InfoList from "@/app/movie/components/InfoList";
 import CastList from "@/app/movie/components/CastList";
-import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import Overview from "@/app/movie/components/Overview";
 import Trailer from"@/app/movie/components/Trailer";
 import VoteAverage from "@/app/movie/components/VoteAverage";
-import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
+import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import Favorites from "@/app/movie/components/Favorites";
 
+import { useUser } from "@/app/profile/components/useUser";
+import { useFavorites } from "@/app/favorites/components/useFavorites";
+import {useScrollToTrailer} from "@/app/movie/components/useScrollToTrailer";
+
 export default function Page() {
-    const { id } = useParams();
     const [tv, setTV] = useState(null);
     const [trailer, setTrailer] = useState(null);
     const [cast, setCast] = useState([]);
     const [loading, setLoading] = useState(true);
-    const trailerRef = useRef(null);
+
+    const { id } = useParams();
+    const { user } = useUser();
+    const { favorites, setFavorites } = useFavorites(user);
+    const { trailerRef, scrollToTrailer } = useScrollToTrailer();
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -38,14 +45,7 @@ export default function Page() {
         });
     }, [id]);
 
-
     if (loading) return <LoadingSpinner />;
-
-    const scrollToTrailer = () => {
-        if (trailerRef.current) {
-            trailerRef.current.scrollIntoView({ behavior: "smooth" });
-        }
-    };
 
     return (
         <div className="container">
@@ -53,11 +53,14 @@ export default function Page() {
                 <div className="card-container">
                     <div className="image-container">
                         <ImageCard item={tv} customClass="img-item" scrollToTrailer={scrollToTrailer}/>
-                        <Favorites item={tv} />
+
+                        {user && (
+                            <Favorites item={tv} itemType="tv" details={tv} userId={user.id}
+                                       favorites={favorites} setFavorites={setFavorites}/>
+                        )}
                     </div>
 
                     <VoteAverage item={tv}/>
-                    <Favorites item={tv} />
                     <InfoList item={tv}/>
                 </div>
             </div>

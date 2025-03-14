@@ -9,8 +9,9 @@ import VoteAverage from "@/app/movie/components/VoteAverage";
 import Title from "@/app/movie/components/Title";
 import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
 import Favorites from "@/app/movie/components/Favorites";
-import {useUser} from "@/app/profile/components/useUser";
-import {getUserFavorites} from "@/app/favorites/components/getUserFavorites";
+
+import { useUser } from "@/app/profile/components/useUser";
+import { useFavorites } from "@/app/favorites/components/useFavorites";
 
 export default function Page() {
     return (
@@ -25,13 +26,13 @@ function SearchPage() {
     const [totalPages, setTotalPages] = useState(0);
     const [cardsList, setCardsList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [favorites, setFavorites] = useState([]);
 
     const { user } = useUser();
     const router = useRouter();
     const previousSearchApi = useRef();
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
+    const { favorites, setFavorites } = useFavorites(user);
 
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const searchApi = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&include_adult=false&language=en-US&query=${query}`;
@@ -71,12 +72,6 @@ function SearchPage() {
             }
         }
     }, [searchApi, query]);
-
-    useEffect(() => {
-        if (user) {
-            getUserFavorites(user.id).then(setFavorites);
-        }
-    }, [user]);
 
     if (loading) return <LoadingSpinner />;
 
