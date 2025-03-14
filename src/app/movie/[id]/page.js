@@ -3,18 +3,18 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import ImageCard from "@/app/movie/components/ImageCard";
-import InfoList from "@/app/movie/components/InfoList";
-import CastList from "@/app/movie/components/CastList";
-import Overview from "@/app/movie/components/Overview";
-import Trailer from"@/app/movie/components/Trailer";
-import VoteAverage from "@/app/movie/components/VoteAverage";
-import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
-import Favorites from "@/app/movie/components/Favorites";
+import ImageCard from "@/app/components/ImageCard";
+import InfoList from "@/app/components/InfoList";
+import CastList from "@/app/components/CastList";
+import Overview from "@/app/components/Overview";
+import Trailer from "@/app/components/Trailer";
+import VoteAverage from "@/app/components/VoteAverage";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
+import Favorites from "@/app/components/Favorites";
 
-import { useUser } from "@/app/profile/components/useUser";
-import { useFavorites } from "@/app/favorites/components/useFavorites";
-import {useScrollToTrailer} from "@/app/movie/components/useScrollToTrailer";
+import { useUser } from "@/app/hooks/useUser";
+import { useFavorites } from "@/app/hooks/useFavorites";
+import {useScrollToTrailer} from "@/app/hooks/useScrollToTrailer";
 
 export default function Page() {
     const [movie, setMovie] = useState(null);

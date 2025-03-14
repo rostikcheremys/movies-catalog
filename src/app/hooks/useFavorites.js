@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { getUserFavorites } from "./getUserFavorites";
+import { getUserFavorites } from "@/app/favorites/utils/getUserFavorites";
 
 export function useFavorites(user) {
     const [favorites, setFavorites] = useState([]);

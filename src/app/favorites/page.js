@@ -3,16 +3,16 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
-import ImageCard from "@/app/movie/components/ImageCard";
-import VoteAverage from "@/app/movie/components/VoteAverage";
-import Title from "@/app/movie/components/Title";
-import Favorites from "@/app/movie/components/Favorites";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
+import ImageCard from "@/app/components/ImageCard";
+import VoteAverage from "@/app/components/VoteAverage";
+import Title from "@/app/components/Title";
+import Favorites from "@/app/components/Favorites";
 import Pagination from "@/app/components/Pagination";
 
-import { useUser } from "@/app/profile/components/useUser";
-import { getUserFavorites } from "@/app/favorites/components/getUserFavorites";
-import { getPaginatedFavorites } from "@/app/favorites/components/getPaginatedFavorites";
+import { useUser } from "@/app/hooks/useUser";
+import { getUserFavorites } from "@/app/favorites/utils/getUserFavorites";
+import { getPaginatedFavorites } from "@/app/favorites/utils/getPaginatedFavorites";
 
 export default function FavoritePage() {
     const [loading, setLoading] = useState(true);

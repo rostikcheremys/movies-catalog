@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { useState } from 'react';
-import {useSignIn} from "@/app/profile/components/useSignIn";
+import {useSignIn} from "@/app/profile/hooks/useSignIn";
 
 export default function SignInForm() {
     const [formData, setFormData] = useState({

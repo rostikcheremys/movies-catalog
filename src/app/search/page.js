@@ -4,14 +4,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 
 import Pagination from "@/app/components/Pagination";
-import ImageCard from "@/app/movie/components/ImageCard";
-import VoteAverage from "@/app/movie/components/VoteAverage";
-import Title from "@/app/movie/components/Title";
-import LoadingSpinner from "@/app/movie/components/LoadingSpinner";
-import Favorites from "@/app/movie/components/Favorites";
+import ImageCard from "@/app/components/ImageCard";
+import VoteAverage from "@/app/components/VoteAverage";
+import Title from "@/app/components/Title";
+import LoadingSpinner from "@/app/components/LoadingSpinner";
+import Favorites from "@/app/components/Favorites";
 
-import { useUser } from "@/app/profile/components/useUser";
-import { useFavorites } from "@/app/favorites/components/useFavorites";
+import { useUser } from "@/app/hooks/useUser";
+import { useFavorites } from "@/app/hooks/useFavorites";
 
 export default function Page() {
     return (

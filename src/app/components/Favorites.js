@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
-import { addToFavorites } from "@/app/favorites/components/addToFavorites";
-import { removeFromFavorites } from "@/app/favorites/components/removeFromFavorites";
+import { addToFavorites } from "@/app/favorites/utils/addToFavorites";
+import { removeFromFavorites } from "@/app/favorites/utils/removeFromFavorites";
 
 export default function Favorites({ item, itemType, details, userId, favorites, setFavorites, setCurrentPage }) {
     const [isFavorite, setIsFavorite] = useState(false);
