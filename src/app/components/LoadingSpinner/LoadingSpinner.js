@@ -1,5 +1,7 @@
 'use client';
 
+import "@/app/components/LoadingSpinner/styles.css"
+
 export default function LoadingSpinner() {
     return (
         <div className="loading-item">

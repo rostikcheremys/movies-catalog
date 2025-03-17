@@ -1,5 +1,7 @@
 'use client';
 
+import "@/app/components/VoteAverage/styles.css"
+
 export default function VoteAverage({item}) {
     return (
         <div className={`vote-average-item

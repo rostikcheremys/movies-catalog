@@ -1,5 +1,7 @@
 'use client';
 
+import "@/app/components/InfoList/styles.css"
+
 export default function InfoList({ item }) {
     return (
         <div className="content-container">

@@ -1,12 +1,12 @@
 'use client';
 
-import './profile.css';
+import './styles.css';
 import { useRouter } from 'next/navigation';
 import { GuestProfile } from "@/app/profile/components/GuestProfile";
 import { UserProfile } from "@/app/profile/components/UserProfile";
 import { useUser } from "@/app/hooks/useUser";
 import supabase from '@/app/profile/components/SupabaseClient';
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
 
 export default function Page() {
     const { user, profile } = useUser();
@@ -20,7 +20,7 @@ export default function Page() {
     if (user === undefined) return <LoadingSpinner />;
 
     return (
-        <div className="container">
+        <div className="profile-wrapper">
             <div className="profile-container">
                 <div className="card-profile">
                     {user ? (

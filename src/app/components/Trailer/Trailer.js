@@ -1,5 +1,7 @@
 'use client';
 
+import "@/app/components/Trailer/styles.css"
+
 export default function Trailer({ trailer, itemTitle }) {
     return (
         trailer && (

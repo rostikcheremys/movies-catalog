@@ -1,6 +1,6 @@
 'use client';
 
-import '@/app/profile/profile.css'
+import '@/app/profile/styles.css'
 
 import SignInForm from '@/app/profile/components/SignInForm';
 

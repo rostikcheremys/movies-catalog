@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from "react";
+
 import Image from "next/image";
+import "@/app/components/ImageCard/styles.css"
 
 export default function ImageCard({ item, customClass, scrollToTrailer }) {
     const [isHovered, setIsHovered] = useState(false);

@@ -3,11 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import LoadingSpinner from "@/app/components/LoadingSpinner";
-import ImageCard from "@/app/components/ImageCard";
-import VoteAverage from "@/app/components/VoteAverage";
-import Title from "@/app/components/Title";
-import Favorites from "@/app/components/Favorites";
+import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
+import ImageCard from "@/app/components/ImageCard/ImageCard";
+import VoteAverage from "@/app/components/VoteAverage/VoteAverage";
+import Title from "@/app/components/Title/Title";
+import Favorites from "@/app/components/Favorites/Favorites";
 import Pagination from "@/app/components/Pagination/Pagination";
 
 import { useUser } from "@/app/hooks/useUser";
@@ -80,8 +80,10 @@ export default function FavoritePage() {
                 ))}
             </div>
 
-            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
-                        fetch={() => getPaginatedFavorites(favorites, currentPage, itemsPerPage)} />
+            {getPaginatedFavorites(favorites, currentPage, itemsPerPage).length > 0 && (
+                <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
+                            fetch={() => getPaginatedFavorites(favorites, currentPage, itemsPerPage)} />
+            )}
         </div>
     );
 }

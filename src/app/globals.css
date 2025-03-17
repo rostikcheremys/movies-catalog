@@ -9,3 +9,101 @@ html, body {
 main {
     flex: 1;
 }
+
+.row {
+    margin: 120px 12px 0 12px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #252627;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card-body-item {
+    flex-direction: row;
+    background-color: #252627;
+    border-radius: 10px;
+    width: 90%;
+    margin: 144px auto 44px auto;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.image-container {
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+}
+
+.img-item {
+    width: 100%;
+    height: 620px;
+    border-radius: 10px 0 0 10px;
+}
+
+.img-item:hover {
+    background-color: white;
+    opacity: 50%;
+}
+
+.img-card {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.img-card:hover {
+    background-color: white;
+    opacity: 50%;
+}
+
+.line-item {
+    width: 100%;
+    height: 8px;
+    background-color: #1d1e20;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 1200px) {
+    .card-body-item {
+        flex-direction: column;
+        align-items: center;
+        width: 500px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0;
+        position: relative;
+    }
+
+    .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .img-item {
+        width: 500px;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+}

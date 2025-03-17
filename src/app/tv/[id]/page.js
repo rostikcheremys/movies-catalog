@@ -3,14 +3,14 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import ImageCard from "@/app/components/ImageCard";
-import InfoList from "@/app/components/InfoList";
-import CastList from "@/app/components/CastList";
-import Overview from "@/app/components/Overview";
-import Trailer from "@/app/components/Trailer";
-import VoteAverage from "@/app/components/VoteAverage";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
-import Favorites from "@/app/components/Favorites";
+import ImageCard from "@/app/components/ImageCard/ImageCard";
+import InfoList from "@/app/components/InfoList/InfoList";
+import CastList from "@/app/components/CastList/CastList";
+import Overview from "@/app/components/Overview/Overview";
+import Trailer from "@/app/components/Trailer/Trailer";
+import VoteAverage from "@/app/components/VoteAverage/VoteAverage";
+import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
+import Favorites from "@/app/components/Favorites/Favorites";
 
 import { useUser } from "@/app/hooks/useUser";
 import { useFavorites } from "@/app/hooks/useFavorites";

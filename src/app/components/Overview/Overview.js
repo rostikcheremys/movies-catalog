@@ -1,5 +1,7 @@
 'use client';
 
+import "@/app/components/Overview/styles.css"
+
 export default function Overview({ overview, trailerRef }) {
     return (
         overview && (

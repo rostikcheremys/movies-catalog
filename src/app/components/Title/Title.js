@@ -1,9 +1,11 @@
 'use client';
 
+import "@/app/components/Title/styles.css"
+
 export default function Title({ item }) {
     return (
         <div className="title-container card-body">
-            <h5 className="title-item">
+            <h5 className="title-item ">
                 {item.title || item.name || "No title available"}
             </h5>
             <h6 className="date-item">

@@ -4,11 +4,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 
 import Pagination from "@/app/components/Pagination/Pagination";
-import ImageCard from "@/app/components/ImageCard";
-import VoteAverage from "@/app/components/VoteAverage";
-import Title from "@/app/components/Title";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
-import Favorites from "@/app/components/Favorites";
+import ImageCard from "@/app/components/ImageCard/ImageCard";
+import VoteAverage from "@/app/components/VoteAverage/VoteAverage";
+import Title from "@/app/components/Title/Title";
+import LoadingSpinner from "@/app/components/LoadingSpinner/LoadingSpinner";
+import Favorites from "@/app/components/Favorites/Favorites";
 
 import { useUser } from "@/app/hooks/useUser";
 import { useFavorites } from "@/app/hooks/useFavorites";
@@ -92,10 +92,17 @@ function SearchPage() {
                 ))}
             </div>
 
-            <Pagination currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage}
-                        fetch={(page) => {setCurrentPage(page); router.push(`?query=${query}&page=${page}`,
+            {cardsList.length > 0 && (
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setCurrentPage={setCurrentPage}
+                    fetch={(page) => {setCurrentPage(page);
+                        router.push(`?query=${query}&page=${page}`,
                             { scroll: true });
-                        }}/>
+                    }
+                }/>
+            )}
         </div>
     );
 }

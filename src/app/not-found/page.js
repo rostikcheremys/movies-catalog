@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import "@/app/not-found/styles.css"
 
 export default function Page() {
     return (

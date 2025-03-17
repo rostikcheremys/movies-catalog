@@ -1,4 +1,4 @@
-.container {
+.profile-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +53,6 @@
 .card-body-profile .bi-person-fill {
     font-size: 150px;
 }
-
 
 .btn-custom-white {
     background-color: #252627;

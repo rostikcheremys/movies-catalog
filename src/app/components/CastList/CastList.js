@@ -1,5 +1,7 @@
 'use client';
 
+import "@/app/components/CastList/styles.css"
+
 export default function CastList({ cast }) {
     if (!cast.length) return null;
 
