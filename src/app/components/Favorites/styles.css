@@ -1,0 +1,20 @@
+.button-favorites {
+    inset-inline-end: 0;
+    top: 0;
+    padding-right: 4px;
+    position: absolute;
+}
+
+.button-favorites button {
+    color: #da202f;
+    font-size: 30px;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.button-favorites button:hover {
+    color: #da202f;
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+}

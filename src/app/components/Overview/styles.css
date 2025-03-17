@@ -1,0 +1,27 @@
+.overview-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #252627;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto 44px auto;
+    padding: 20px 30px;
+    color: white;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.overview-container:hover .line-item {
+    background-color: #da202f;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.overview-container p {
+    margin: 0;
+}
+
+@media (max-width: 1200px) {
+    .overview-container {
+        width: 500px;
+    }
+}
