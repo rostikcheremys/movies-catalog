@@ -1,3 +1,11 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 .profile-wrapper {
     display: flex;
     justify-content: center;
@@ -91,7 +99,7 @@
     cursor: pointer;
 }
 
-.item-form input.form-control, .item-form select.form-select, .search-item input.form-control{
+.item-form input.form-control, .item-form select.form-select{
     border: 1px solid #ced4da;
     background-color: #252627;
     border-radius: 4px;
@@ -104,7 +112,7 @@
     background-color: rgba(255, 0, 0, 0.1);
 }
 
-.item-form input::placeholder, .search-item input::placeholder {
+.item-form input::placeholder {
     color: #ced4da;
     opacity: 1;
 }

@@ -62,6 +62,19 @@
     min-width: 250px;
 }
 
+.search-item .form-control{
+    border: 1px solid #ced4da;
+    background-color: #252627;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+    color: white;
+}
+
+.search-item input::placeholder {
+    color: #ced4da;
+    opacity: 1;
+}
+
 .navbar-action {
     display: flex;
     list-style: none;
