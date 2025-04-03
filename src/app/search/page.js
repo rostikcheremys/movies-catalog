@@ -83,7 +83,7 @@ function SearchPage() {
 
                             {user && (
                                 <Favorites item={search} itemType={search.media_type} details={search} userId={user.id}
-                                           favorites={favorites} setFavorites={setFavorites}/>
+                                           favorites={favorites} setFavorites={setFavorites} setCurrentPage={setCurrentPage}/>
                             )}
 
                             <Title item={search} />

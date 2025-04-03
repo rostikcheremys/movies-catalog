@@ -7,7 +7,7 @@ import { removeFromFavorites } from "@/app/favorites/utils/removeFromFavorites";
 
 import "@/app/components/Favorites/styles.css"
 
-export default function Favorites({ item, itemType, details, userId, favorites, setFavorites, setCurrentPage }) {
+export default function Favorites({ item, itemType, details, userId, favorites, setFavorites, setCurrentPage = null }) {
     const [isFavorite, setIsFavorite] = useState(false);
 
     const handleToggleFavorite = async (e) => {
@@ -20,9 +20,10 @@ export default function Favorites({ item, itemType, details, userId, favorites, 
             setFavorites(prev => prev.filter(fav => !(fav.item_id === item.id && fav.item_type === itemType)));
             setIsFavorite(false);
 
-            const remainingItems = favorites.filter(fav => fav.item_id !== item.id && fav.item_type === itemType);
-            if (remainingItems.length === 0) setCurrentPage(1);
-
+            if (setCurrentPage) {
+                const remainingItems = favorites.filter(fav => fav.item_id !== item.id && fav.item_type === itemType);
+                if (remainingItems.length === 0) setCurrentPage(1);
+            }
         } else {
             await addToFavorites(userId, item.id, itemType, poster_path, title, name, release_date, first_air_date, vote_average);
 

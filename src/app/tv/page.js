@@ -65,7 +65,7 @@ export default function TVPage() {
 
                             {user && (
                                 <Favorites item={tv} itemType="tv" details={tv} userId={user.id}
-                                           favorites={favorites} setFavorites={setFavorites}/>
+                                           favorites={favorites} setFavorites={setFavorites} setCurrentPage={setCurrentPage}/>
                             )}
 
                             <Title item={tv} />

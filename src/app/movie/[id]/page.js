@@ -56,7 +56,7 @@ export default function Page() {
 
                         {user && (
                             <Favorites item={movie} itemType="movie" details={movie} userId={user.id}
-                                       favorites={favorites} setFavorites={setFavorites}/>
+                                       favorites={favorites} setFavorites={setFavorites} />
                         )}
                     </div>
 
